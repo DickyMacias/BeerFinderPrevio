@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <WebView
+            android:layout_width="110dp"
+            android:layout_height="110dp" />
+
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="90dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/beerNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Title"
+                    tools:paddingBottom="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="2dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content"
+                    android:text="% Alcohol: " />
+
+                <TextView
+                    android:id="@+id/beerGrado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="2dp">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="73dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo" />
+
+                <TextView
+                    android:id="@+id/BeerTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="2dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="69dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cervecera:" />
+
+                <TextView
+                    android:id="@+id/BeerCasa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="2dp">
+
+                <Space
+                    android:layout_width="137dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10.88" />
+
+                <TextView
+                    android:id="@+id/BeerMas"
+                    android:layout_width="71dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:keepScreenOn="true"
+                    android:text="Mas..." />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

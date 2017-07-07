@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context="mx.netsquare.beerfindebeta.Agregando">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/txtLugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lugar" />
+
+        <EditText
+            android:id="@+id/editLugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_light"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/txtHorario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Horario" />
+
+        <EditText
+            android:id="@+id/editHorario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_light"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/txtDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripcion" />
+
+        <EditText
+            android:id="@+id/editDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.34"
+            android:background="@color/primary_light"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/txtLatLng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(%$1s, %$2s)" />
+
+
+        <TextView
+            android:id="@+id/txtLat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(%$1s)" />
+
+        <TextView
+            android:id="@+id/txtLng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(%$1s)" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/BtnIfTecate"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:onClick="ifTecate"
+                app:srcCompat="@drawable/tecate" />
+
+            <ImageButton
+                android:id="@+id/btnIfCorona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ifCorona"
+                app:srcCompat="@drawable/corona" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.widget.RelativeLayout>

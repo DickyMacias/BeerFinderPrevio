@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name = "app_name"> Beer Finder Beta </string>
+         <string name = "title_activity_maps"> Beer Finder </string>
+
+
+         <string name = "facebook_app_id"> 0918273645 </string>
+         <string name = "fb_login_protocol_scheme"> fb0918273645 </string>
+         <string name = "user"> ユーザー </string>
+         <string name = "password"> パスワード </string>
+         <string name = "forgotpassword"> パスワードを忘れましたか？ </string>
+         <string name = "access"> アクセス </string>
+         <string name = "typeUsername"> ユーザー名を入力します。 </string>
+         <string name = "email"> メール </string>
+         <string name = "confirmConfirm"> パスワードを確認 </string>
+         <string name = "telephone"> 電話 </string>
+         <string name = "register"> 登録 </string>
+
+</resources>

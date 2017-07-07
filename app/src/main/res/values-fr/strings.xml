@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name = "app_name"> Beta Finder Beer </string>
+         <string name = "title_activity_maps"> Finder Beer </string>
+
+
+         <string name = "facebook_app_id"> 0918273645 </string>
+         <string name = "fb_login_protocol_scheme"> fb0918273645 </string>
+         <string name = "utilisateur"> Utilisateur </string>
+         <string name = "password"> Mot de passe </string>
+         <string name = "olvidoContrasena"> Mot de passe oublié? </string>
+         <string name = "Accès"> Accès </string>
+         <string name = "escribaUsuario"> Entrez votre nom d\'utilisateur... </string>
+         <string name = "email"> Email </string>
+         <string name = "confirmarContrasena"> Confirmer mot de passe </string>
+         <string name = "Téléphone"> Téléphone </string>
+         <string name = "enregistrer"> enregistrer </string>
+
+</resources>
