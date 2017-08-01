@@ -29,13 +29,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.loopj.android.http.AsyncHttpClient.LOG_TAG;
 
 public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
 
-    public static List<Marcador> lugares;
+    //public static List<Marcador> lugares;
 
     private JSONParser jsonParser = null; //Objeto conexion webservice
 
@@ -169,33 +170,81 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
                 try {
 
-        //            JSONObject ob = new JSONObject(json);
-        //            JSONArray arr = ob.getJSONArray("marcadores");
-
-                    lugares = Marcadores.parseJsonToObject(json);
+                    JSONObject ob = new JSONObject(json);
+                    JSONArray arr = ob.getJSONArray("marcadores");
 
 
+                    ArrayList<Marcador> lugares =
+                            Marcadores.parseJsonToObject(arr);
 
-                    for (Marcador marcador:lugares) {
-                        double lat = Double.parseDouble(marcador.getGm_latitud());
-                        double lng = Double.parseDouble(marcador.getGm_longitud());
-                        LatLng latLng = new LatLng(lat,lng);
+
+                    if (lugares == null)
+                        Log.e("Error", "No es nulo");
+
+
+                    Marcador m = null;
+                    //for(Marcador m : lugares){
+                    for (int i = 0; i < lugares.size(); i++) {
+
+                        m = lugares.get(i);
+
+                        Log.e("Mapa General ", m.toString());
+
+                        double lat = Double.parseDouble(m.getGm_latitud());
+                        double lng = Double.parseDouble(m.getGm_longitud());
+                        LatLng latLng = new LatLng(lat, lng);
+
+
+                        if (i == 0)
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+
+                            mMap.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.defaultMarker())
+                                .title(m.getLugar())
+                                .snippet(m.getDescripcion())
+                                .position(latLng));
+
+
+                        /*
+                        LatLng utch  =  new LatLng(28.6458775, -106.1475035);
+                        LatLng utch1 =  new LatLng(28.6458775, -106.1275075);
+                        LatLng utch2 =  new LatLng(28.6458775, -106.1675095);
+
+                        if (i == 0)
+                            mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
+
+                        if (i == 1)
+                            mMap.addMarker(new MarkerOptions().position(utch1).title("UTCH1"));
+
+
+                        if (i == 2) {
+
+                            mMap.addMarker(new MarkerOptions().position(utch2).title("UTCH2"));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(utch2));
+                        }
+                        */
+
+                        /*
                         mMap.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.defaultMarker())
-                                .title(marcador.getLugar())
-                                .snippet(marcador.getDescripcion())
+                                .title(m.getLugar())
+                                .snippet(m.getDescripcion())
                                 .position(latLng));
-                        System.out.println(latLng + " " + marcador.getLugar() + " " + marcador.getDescripcion());
-
+                        */
                     }
 
-                    LatLng utch = new LatLng(28.6458775, -106.1475035);
-                    mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(utch));
+
+                    //LatLng utch = new LatLng(28.6458775, -106.1475035);
+                    //mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
+
+
 
                 } catch (Exception e) {
                     Log.e(LOG_TAG, "Error generando marcadores de espacios", e);
                 }
+
+
 
             }
 

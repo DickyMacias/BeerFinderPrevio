@@ -16,6 +16,12 @@ public class Marcador implements Serializable{
     private String gm_latitud;
     private String gm_longitud;
 
+
+    @Override
+    public String toString() {
+        return "--> " + lugar + " " + descripcion + " " + gm_latitud + " " + gm_longitud;
+     }
+
     public int getId() {
         return id;
     }
