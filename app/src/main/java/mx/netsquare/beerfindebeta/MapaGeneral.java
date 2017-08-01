@@ -113,7 +113,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
 
 
-        class MarkerTask extends AsyncTask<Void, Void, String> {
+        class MarkerTask extends AsyncTask<Void, Void, JSONObject> {
 
             @Override
             protected void onPreExecute() {
@@ -130,61 +130,111 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
             @Override
             protected String doInBackground(Void... args) {
 
+            int responseCode = -1;
+            JSONObject resultado = null;
 
+            try{
 
-                HttpURLConnection conn = null;
-                final StringBuilder json = new StringBuilder();
-                try {
-                    // Connect to the web service
-                    URL url = new URL(SERVICE_URL);
-                    conn = (HttpURLConnection) url.openConnection();
-                    InputStreamReader in = new InputStreamReader(conn.getInputStream());
+                URL apiURL =  new URL(SERVICE_URL);
 
-                    // Read the JSON data into the StringBuilder
-                    int read;
-                    char[] buff = new char[1024];
-                    while ((read = in.read(buff)) != -1) {
-                        json.append(buff, 0, read);
+                Log.d(TAG, apiURL.toString());
+
+                HttpURLConnection httpConnection = (HttpURLConnection) apiURL.openConnection();
+                httpConnection.setRequestMethod("GET");
+                httpConnection.connect();
+
+                responseCode = httpConnection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK){
+
+                    InputStream inputStream = httpConnection.getInputStream();
+                    BufferedReader bReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+                    StringBuilder sBuilder = new StringBuilder();
+
+                    String line = null;
+                    while ((line = bReader.readLine()) != null) {
+                        sBuilder.append(line + "\n");
                     }
 
-                } catch (IOException e) {
-                    Log.e(LOG_TAG, "Error connecting to service", e);
-                    //throw new IOException("Error connecting to service", e); //uncaught
-                } finally {
-                    if (conn != null) {
-                        conn.disconnect();
-                    }
+                    inputStream.close();
+
+                    resultado = new JSONObject(sBuilder.toString());
+
+                    Log.d(TAG, sBuilder.toString());
+
+                }else{
+                    Log.i(TAG, "Error en el HTTP " + responseCode);
                 }
+            }
+            catch (JSONException e){
+                manejoExcepcion(e);
+            }
+            catch (MalformedURLException e){manejoExcepcion(e);}
+            catch (IOException e){manejoExcepcion(e);}
+            catch (Exception e){
+                manejoExcepcion(e);
 
-                return json.toString();
+            }
+
+            return resultado;
 
             }
 
 
             @Override
-            protected void onPostExecute(String json) {
-
+            protected void onPostExecute(JSONObject place) {
+                // Probar estos dos marcadores primero (poner en un lugar visible del mapa)
+                LatLng lat1 = new LatLng(28.55, -106.05);
+                mMap.addMarker(new MarkerOptions()
+                    .title("Hola")
+                    .position(lat1));
+                
+                LatLng lat2 = new LatLng(28.45, -106.35);
+                mMap.addMarker(new MarkerOptions()
+                    .title("Mundo")
+                    .position(lat2));
+                
                 Log.e("No funciona",SERVICE_URL);
                 Log.e("Error",json.toString());
 
                 try {
+                    
+                    JSONArray lugares = place.getJSONArray("places");
 
         //            JSONObject ob = new JSONObject(json);
         //            JSONArray arr = ob.getJSONArray("marcadores");
 
-                    lugares = Marcadores.parseJsonToObject(json);
+                    // lugares = Marcadores.parseJsonToObject(json);
 
-
-
-                    for (Marcador marcador:lugares) {
+                    for (JSONObject lugar:lugares) {
+                        // Obtener las coordenadas del lugar
+				        String coord = lugar.getString("coordenadas");
+                        
+                        // separarlas por la coma
+                        String lats[] = coord.split(",");
+                        
+                        Double latitud = Double.parseDouble(lats[0]);
+                        Double longitud = Double.parseDouble(lats[1]);
+                        
+                        /*
+                        o en su defecto obtenerlos directo del objeto
+                        Double latitud = lugar.getDouble("lat");
+                        Double longitud = lugar.getDouble("lon");
+                        */
+                        
+                        // Crear LatLng
+                        LatLng latLng = new LatLng(lat,lng);
+                        
+                        /*
                         double lat = Double.parseDouble(marcador.getGm_latitud());
                         double lng = Double.parseDouble(marcador.getGm_longitud());
-                        LatLng latLng = new LatLng(lat,lng);
+                        LatLng latLng = new LatLng(lat,lng);*/
                         mMap.addMarker(new MarkerOptions()
-                                .icon(BitmapDescriptorFactory.defaultMarker())
-                                .title(marcador.getLugar())
-                                .snippet(marcador.getDescripcion())
+                                //.icon(BitmapDescriptorFactory.defaultMarker())
+                                .title("Hola Mundo") // marcador.getLugar())
+                                //.snippet(marcador.getDescripcion())
                                 .position(latLng));
+                        
                         System.out.println(latLng + " " + marcador.getLugar() + " " + marcador.getDescripcion());
 
                     }
@@ -201,6 +251,10 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
 
         }
+
+    private void manejoExcepcion(Exception e){
+        Log.e(TAG, "Exception caught: ", e);
+    }
 
 
 
