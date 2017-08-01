@@ -23,16 +23,18 @@ public class Agregando extends AppCompatActivity {
 
     private EditText lugar = null, horario = null, desc = null;
     private TextView  coordenadas = null;
-    private TextView coordLat = null;
-    private TextView coordLng = null;
+    private TextView gm_lat = null;
+    private TextView gm_lng = null;
     private JSONParser jsonParser = null;
     private ProgressDialog progressDialog;
     private static String _url = null;
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_LUGAR    = "lugar";
-    private static final String TAG_HORARIO   = "horario";
+    private static final String TAG_HORARIO    = "horario";
     private static final String TAG_DESC    = "descripcion";
     private static final String TAG_COORD = "coordenadas";
+    private static final String TAG_LATITUD    = "gm_lat";
+    private static final String TAG_LONGITUD = "gm_lng";
 
 
 
@@ -52,10 +54,7 @@ public class Agregando extends AppCompatActivity {
 
         // Extraer lat. y lng.
         Intent intent = getIntent();
-        String latlng = String.format(
-                getString(R.string.marker_latlng),
-                intent.getDoubleExtra(MapsActivity.LATITUD, 0),
-                intent.getDoubleExtra(MapsActivity.LONGITUD, 0));
+       String latlng = intent.getStringExtra(MapsActivity.COORDENADAS);
         String lat = String.format(getString(R.string.marker_lat),
                 intent.getDoubleExtra(MapsActivity.LATITUD,0));
         String lng = String.format(getString(R.string.marker_lng),
@@ -66,10 +65,11 @@ public class Agregando extends AppCompatActivity {
         // llenar campos
         coordenadas = (TextView) findViewById(R.id.txtLatLng);
         coordenadas.setText(latlng);
-        coordLat = (TextView)findViewById(R.id.txtLat);
-        coordLat.setText(lat);
-        coordLng = (TextView)findViewById(R.id.txtLng);
-        coordLng.setText(lng);
+        gm_lat = (TextView)findViewById(R.id.txtLat);
+        gm_lat.setText(lat);
+        gm_lng = (TextView)findViewById(R.id.txtLng);
+        gm_lng.setText(lng);
+
 
 
 
@@ -81,8 +81,10 @@ public class Agregando extends AppCompatActivity {
         String horario = this.horario.getText().toString();
         String desc  = this.desc.getText().toString();
         String coord = this.coordenadas.getText().toString();
+        String gm_lat = this.gm_lat.getText().toString();
+        String gm_lng = this.gm_lng.getText().toString();
       //  Toast.makeText(this, lugar+horario+desc+ coord, Toast.LENGTH_SHORT).show();
-        new agregarNuevo().execute(lugar,horario,desc,coord);
+        new agregarNuevo().execute(lugar,horario,desc,coord,gm_lat,gm_lng);
 
     }
 
@@ -113,6 +115,8 @@ public class Agregando extends AppCompatActivity {
                 Params.add(new BasicNameValuePair(TAG_HORARIO,params[1]));
                 Params.add(new BasicNameValuePair(TAG_DESC,params[2]));
                 Params.add(new BasicNameValuePair(TAG_COORD,params[3]));
+                Params.add(new BasicNameValuePair(TAG_LATITUD,params[4]));
+                Params.add(new BasicNameValuePair(TAG_LONGITUD,params[5]));
 
 
                 JSONObject json = jsonParser.makeHttpRequest(_url,"POST",Params);

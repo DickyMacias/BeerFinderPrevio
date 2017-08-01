@@ -14,18 +14,21 @@
     <string name="confirmarContrasena">Confirmar Contraseña</string>
     <string name="telefono">Telefono</string>
     <string name="registrarse">Registrarse</string>
-    <string name="title_activity_menu_lateral">MenuLateral</string>
 
-    <string name="navigation_drawer_open">Menu Lateral</string>
-    <string name="navigation_drawer_close">Cerrar Menu Lateral</string>
-
-    <string name="action_settings">Ajustes</string>
 
     <!--    Si se modifica el formato no funciona. Tener cuidado del orden y que siempre quede 1 y luego 2 en caso de ser multiples coordenadas-->
-    <string name="marker_latlng">(%1$.7f, %2$.7f)</string>
-    <string name="marker_lat">(%1$.7f)</string>
-    <string name="marker_lng">(%1$.7f)</string>
+    <string name="marker_latlng"> </string>
+    <string name="marker_lat">%1$.14f</string>
+    <string name="marker_lng">%1$.14f</string>
+
 
     <string name="title_activity_mapa_general">Map</string>
+    <string name="title_activity_menu_desplegable">MenuDesplegable</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="textview">TextView</string>
 
 </resources>

@@ -1,39 +1,56 @@
 package mx.netsquare.beerfindebeta;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class Login extends AppCompatActivity {
 
-    private EditText user = null;
-    private EditText pass = null;
+    private ProgressDialog progressDialog;
+
+    private EditText user1 = null;
+    private EditText pass1 = null;
+
+    private String user;
+    private String pass;
+
+    private JSONParser jsonParser = null; //Objeto conexion webservice
+    private static String _url = null;
+    ArrayList<HashMap<String,String>> info = null;
+
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_USERS   = "usuarios";
+    private static final String TAG_USER   = "Username";
+    private static final String TAG_PASS  = "Password";
+
+    String users[]  = new String[100];
+    String passwords[] = new String[100];
+
+    private JSONArray usuarios=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +60,21 @@ public class Login extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-        user = (EditText) findViewById(R.id.llenarUsuario);
-        pass = (EditText) findViewById(R.id.llenarContrasena);
+        user1 = (EditText) findViewById(R.id.llenarUsuario);
+        pass1 = (EditText) findViewById(R.id.llenarContrasena);
+
     }
 
     public void login(View view) {
 
+        _url ="http://192.168.56.1:9090/webservice/get_usuario.php";
+        info = new ArrayList<HashMap<String, String>>(); //Se guardan registros aqui
+
+        user = user1.getText().toString();
+        pass = pass1.getText().toString();
+
         new usersJson().execute();
+
     }
 
     class usersJson extends AsyncTask<Void, Void, Boolean> {
@@ -57,6 +82,13 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            usuarios = new JSONArray();
+
+            progressDialog = new ProgressDialog(Login.this);
+            progressDialog.setMessage("Autenticando...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         @Override
@@ -64,37 +96,55 @@ public class Login extends AppCompatActivity {
 
             try {
 
-// Creamos el Gson y le pasamos la URL
+                List<NameValuePair> Params = new ArrayList<NameValuePair>();
+                //Almacena la consulta al webservice
 
-                Gson miGson = new Gson();
-                URL url = new URL("http://192.168.56.1:9090/webservice/get_usuario.php");
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(url.openStream(),
-                                Charset.forName("UTF-8")));
+                JSONObject json = null;
+                jsonParser = new JSONParser();
 
-//Pasamos la info del Json a un objeto para hacer la consulta
-                Usuarios data = miGson.fromJson(reader, Usuarios.class);
-                List<Usuario> users = data.getUsers();
+                try {
+                    //Se realiza la conexion al web service
+                    json = jsonParser.makeHttpRequest(_url, "GET", Params);
+                    Log.e("Error", json.toString());
 
-                for (int i = 0; i < users.size(); i++) {
 
-                    if (user.equals(users.get(i).toString())
-                            && pass.equals(users.get(i).toString())) {
-                        return true;
-                    } else
-                        return false;
+                    int ready = json.getInt(TAG_SUCCESS);
+                    if (ready == 1) {
+
+                        usuarios = json.getJSONArray(TAG_USERS);
+
+                        for(int i = 0; i<usuarios.length(); i++){
+                            JSONObject u = usuarios.getJSONObject(i);
+                            String username  = u.getString(TAG_USER);
+                            String password = u.getString(TAG_PASS);
+                            Log.e("pruebas", user + ":" + username + "&" + pass + ":" + password);
+
+                            if (user.equals(username)
+                                    && pass.equals(password)) {
+                                return true;
+                            } else {
+                                return false;
+
+                        }
+
+                    }
                 }
 
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             } catch (Exception e) {
-                Log.i("valores", "Error al generar consulta");
                 e.printStackTrace();
             }
 
-            return false;
+            return null;
+
         }
 
-
-        @Override
+                @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
@@ -102,14 +152,19 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean resultado) {
 
-            if (true) {
-                Intent intentMap = new Intent(getApplicationContext(), MapaGeneral.class);
+            if (resultado) {
+                Intent intentMap = new Intent(getApplicationContext(), MenuDesplegable.class);
                 startActivity(intentMap);
 
 
+
+
             } else {
-                Toast.makeText(Login.this, "Usuario o Contrasena Incorrectos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Usuario o Contrasena Incorrectos", Toast.LENGTH_SHORT)
+                        .show();
             }
+
+            progressDialog.dismiss();
         }
 
     }

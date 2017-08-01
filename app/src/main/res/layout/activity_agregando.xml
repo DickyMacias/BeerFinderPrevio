@@ -69,20 +69,20 @@
             android:id="@+id/txtLatLng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="(%$1s, %$2s)" />
+            android:text="coordenadas" />
 
 
         <TextView
             android:id="@+id/txtLat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="(%$1s)" />
+            android:text="%$1s" />
 
         <TextView
             android:id="@+id/txtLng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="(%$1s)" />
+            android:text="%$1s" />
 
         <LinearLayout
             android:layout_width="match_parent"

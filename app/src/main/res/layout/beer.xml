@@ -11,9 +11,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <WebView
+        <ImageView
+            android:id="@+id/BeerImagen"
             android:layout_width="110dp"
-            android:layout_height="110dp" />
+            android:layout_height="110dp"
+            app:srcCompat="@drawable/tarro_iphone1" />
 
         <Space
             android:layout_width="8dp"

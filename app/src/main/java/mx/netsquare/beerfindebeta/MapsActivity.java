@@ -3,11 +3,13 @@ package mx.netsquare.beerfindebeta;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -29,6 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public final static String LATITUD = null;
     public final static String LONGITUD = null;
+    public static String COORDENADAS = null;
     private GoogleMap mMap;
 
     @Override
@@ -83,31 +86,58 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             Intent intent = new Intent(this, Agregando.class);
             intent.putExtra(LATITUD, marker.getPosition().latitude);
+        Toast.makeText(this, LATITUD + "ese no " + LONGITUD , Toast.LENGTH_SHORT).show();
             intent.putExtra(LONGITUD, marker.getPosition().longitude);
+
             startActivity(intent);
 
         return false;
     }
 
 
+
+
     @Override
     public void onMapClick(LatLng point) {
 
+        mMap.addMarker(new MarkerOptions().position(point).title(point.toString()));
 
-            MarkerOptions marker = new MarkerOptions().position(
+        //The code below demonstrate how to convert between LatLng and Location
 
-                    new LatLng(point.latitude, point.longitude)) //Strings del fragmento se guardan en base de datos y de BD se traen con un select para almacenarlos en variable
+        //Convert LatLng to Location
+        Location location = new Location("Test");
+        location.setLatitude(point.latitude);
+        location.setLongitude(point.longitude);
+        //location.setTime(new Date().getTime()); //Set time as current Date
+        //info.setText(location.toString());
+
+        //Convert Location to LatLng
+        LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        MarkerOptions marker = new MarkerOptions()
+                .position(newLatLng)
+                .title(newLatLng.toString());
+
+        mMap.addMarker(marker);
+        COORDENADAS = newLatLng.toString();
+
+
+
+/*        MarkerOptions marker = new MarkerOptions().position(
+
+                new LatLng(point.latitude, point.longitude)) //Strings del fragmento se guardan en base de datos y de BD se traen con un select para almacenarlos en variable
                     .title("New Marker")
                     .snippet("Descripcion")
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.corona));
 
 
 
-            mMap.addMarker(marker);
+            mMap.addMarker(marker);*/
 
         Intent intent = new Intent(this, Agregando.class);
         intent.putExtra(LATITUD, marker.getPosition().latitude);
         intent.putExtra(LONGITUD, marker.getPosition().longitude);
+        intent.putExtra(COORDENADAS, newLatLng.toString());
         startActivity(intent);
 
 
