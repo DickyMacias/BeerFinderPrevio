@@ -86,7 +86,8 @@
                 android:value="mx.netsquare.beerfindebeta.Login" />
         </activity>
         <activity android:name=".MenuPrincipal" />
-        <activity android:name=".BeerDescripcion"></activity>
+        <activity android:name=".BeerDescripcion" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

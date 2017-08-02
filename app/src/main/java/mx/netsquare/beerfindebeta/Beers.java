@@ -184,6 +184,7 @@ public class Beers extends ListActivity {
         //   WebView webview = null;
 
 
+
             ListAdapter adapter = new SimpleAdapter(
                     Beers.this,
                     record,

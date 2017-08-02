@@ -34,7 +34,7 @@ import java.util.List;
 
 import static com.loopj.android.http.AsyncHttpClient.LOG_TAG;
 
-public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
+public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
 
     //public static List<Marcador> lugares;
 
@@ -47,6 +47,8 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
     private static final String LOG_TAG = "Prueba: ";
 
     private final String SERVICE_URL = "http://192.168.56.1:9090/webservice/get_all_markers.php";
+    private final String SERVICE_URL2 = "http://192.168.56.1:9090/webservice/get_all_negocios.php";
+
 
     private JSONArray marcadores = null;
     private ProgressDialog progressDialog;
@@ -68,51 +70,28 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        LatLngBounds Chihuahua = new LatLngBounds(new LatLng(28.6, -106.1), new LatLng(28.7, -106.15));
         if (mMap != null) {
             mMap.clear();
             new MarkerTask().execute();
+            new NegocioTask().execute();
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Chihuahua.getCenter(), 15));
         }
 
-        LatLngBounds Chihuahua = new LatLngBounds(new LatLng(28.6, -106.1), new LatLng(28.7, -106.15));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Chihuahua.getCenter(), 15));
-
-//        mMap.setMaxZoomPreference(10.0f);
+        mMap.setMaxZoomPreference(15.0f);
 
         UiSettings uisettings = mMap.getUiSettings();
         uisettings.setAllGesturesEnabled(true);
         uisettings.setMyLocationButtonEnabled(true);
 
         mMap.setOnInfoWindowClickListener(this);
-        mMap.setOnMapClickListener(this);
-//        mMap.setOnMapLongClickListener(this);
         mMap.setOnMarkerClickListener(this);
 
 
-        // Agregar sitios en el mapa para primer referencia y posicion
-//        LatLng utch = new LatLng(28.6458775, -106.1475035);
-//        mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(utch));
 
-
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED
-//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-
-    @Override
-    public void onMapLongClick(LatLng latLng) {
+        //Agregar sitios en el mapa para primer referencia y posicion
 
     }
-//        mMap.setMyLocationEnabled(true);
-
-
-//      }
-
-
-
 
         class MarkerTask extends AsyncTask<Void, Void, String> {
 
@@ -122,26 +101,25 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
                 marcadores = new JSONArray();
 
-                /*progressDialog = new ProgressDialog(MapaGeneral.this);
+                progressDialog = new ProgressDialog(MapaGeneral.this);
                 progressDialog.setMessage("Cargando...");
                 progressDialog.setCancelable(false);
-                progressDialog.show();*/
+                progressDialog.show();
+
             }
             // Invoked by execute() method of this object
             @Override
             protected String doInBackground(Void... args) {
 
-
-
                 HttpURLConnection conn = null;
                 final StringBuilder json = new StringBuilder();
                 try {
-                    // Connect to the web service
+                    // Conectando con el web service
                     URL url = new URL(SERVICE_URL);
                     conn = (HttpURLConnection) url.openConnection();
                     InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
-                    // Read the JSON data into the StringBuilder
+                    // Leer informacion del Json en el Builder
                     int read;
                     char[] buff = new char[1024];
                     while ((read = in.read(buff)) != -1) {
@@ -150,7 +128,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
                 } catch (IOException e) {
                     Log.e(LOG_TAG, "Error connecting to service", e);
-                    //throw new IOException("Error connecting to service", e); //uncaught
+
                 } finally {
                     if (conn != null) {
                         conn.disconnect();
@@ -205,52 +183,126 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
                                 .snippet(m.getDescripcion())
                                 .position(latLng));
 
-
-                        /*
-                        LatLng utch  =  new LatLng(28.6458775, -106.1475035);
-                        LatLng utch1 =  new LatLng(28.6458775, -106.1275075);
-                        LatLng utch2 =  new LatLng(28.6458775, -106.1675095);
-
-                        if (i == 0)
-                            mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
-
-                        if (i == 1)
-                            mMap.addMarker(new MarkerOptions().position(utch1).title("UTCH1"));
-
-
-                        if (i == 2) {
-
-                            mMap.addMarker(new MarkerOptions().position(utch2).title("UTCH2"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(utch2));
-                        }
-                        */
-
-                        /*
-                        mMap.addMarker(new MarkerOptions()
-                                .icon(BitmapDescriptorFactory.defaultMarker())
-                                .title(m.getLugar())
-                                .snippet(m.getDescripcion())
-                                .position(latLng));
-                        */
                     }
-
-
-                    //LatLng utch = new LatLng(28.6458775, -106.1475035);
-                    //mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
-
 
 
                 } catch (Exception e) {
                     Log.e(LOG_TAG, "Error generando marcadores de espacios", e);
                 }
 
-
+                progressDialog.dismiss();
 
             }
 
 
+
         }
 
+
+    class NegocioTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            marcadores = new JSONArray();
+
+/*            progressDialog = new ProgressDialog(MapaGeneral.this);
+            progressDialog.setMessage("Cargando...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();*/
+
+        }
+        // Invoked by execute() method of this object
+        @Override
+        protected String doInBackground(Void... args) {
+
+            HttpURLConnection conn = null;
+            final StringBuilder json = new StringBuilder();
+            try {
+                // Conectando con el web service
+                URL url = new URL(SERVICE_URL2);
+                conn = (HttpURLConnection) url.openConnection();
+                InputStreamReader in = new InputStreamReader(conn.getInputStream());
+
+                // Leer informacion del Json en el Builder
+                int read;
+                char[] buff = new char[1024];
+                while ((read = in.read(buff)) != -1) {
+                    json.append(buff, 0, read);
+                }
+
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "Error connecting to service", e);
+
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
+            }
+
+            return json.toString();
+
+        }
+
+
+        @Override
+        protected void onPostExecute(String json) {
+
+            Log.e("No funciona",SERVICE_URL2);
+            Log.e("Error",json.toString());
+
+            try {
+
+                JSONObject ob = new JSONObject(json);
+                JSONArray arr = ob.getJSONArray("marcadores");
+
+
+                ArrayList<Marcador> lugares =
+                        Marcadores.parseJsonToObject(arr);
+
+
+                if (lugares == null)
+                    Log.e("Error", "No es nulo");
+
+
+                Marcador m = null;
+                //for(Marcador m : lugares){
+                for (int i = 0; i < lugares.size(); i++) {
+
+                    m = lugares.get(i);
+
+                    Log.e("Mapa General ", m.toString());
+
+                    double lat = Double.parseDouble(m.getGm_latitud());
+                    double lng = Double.parseDouble(m.getGm_longitud());
+                    LatLng latLng = new LatLng(lat, lng);
+
+
+                    if (i == 0)
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+
+                    mMap.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+                            .title(m.getLugar())
+                            .snippet(m.getDescripcion())
+                            .position(latLng));
+
+                }
+
+
+            } catch (Exception e) {
+                Log.e(LOG_TAG, "Error generando marcadores de espacios", e);
+            }
+
+            //progressDialog.dismiss();
+
+        }
+
+
+
+    }
 
 
     @Override
@@ -264,11 +316,6 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
         
 
         return false;
-    }
-
-    @Override
-    public void onMapClick(LatLng latLng) {
-
     }
 
     public void AgregaLugar(View view) {

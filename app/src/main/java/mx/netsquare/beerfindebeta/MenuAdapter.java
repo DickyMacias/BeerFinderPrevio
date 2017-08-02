@@ -1,12 +1,4 @@
-/*
 package mx.netsquare.beerfindebeta;
-
-*/
-/**
- * Created by dicky on 7/31/2017.
- *//*
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,11 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-*/
 /**
  * Created by dicky on 7/31/2017.
- *//*
-
+ */
 
 public class MenuAdapter extends BaseAdapter {
 
@@ -79,4 +69,3 @@ public class MenuAdapter extends BaseAdapter {
         return v;
     }
 }
-*/
