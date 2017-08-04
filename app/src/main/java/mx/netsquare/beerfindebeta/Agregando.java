@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.MapsInitializer;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -54,11 +57,13 @@ public class Agregando extends AppCompatActivity {
 
         // Extraer lat. y lng.
         Intent intent = getIntent();
-       String latlng = intent.getStringExtra(MapsActivity.COORDENADAS);
+        String latlng = intent.getStringExtra(MapsActivity.COORDENADAS);
         String lat = String.format(getString(R.string.marker_lat),
                 intent.getDoubleExtra(MapsActivity.LATITUD,0));
+        //Toast.makeText(this, , Toast.LENGTH_SHORT).show();
         String lng = String.format(getString(R.string.marker_lng),
                 intent.getDoubleExtra(MapsActivity.LONGITUD,0));
+
 
 
 
@@ -86,9 +91,8 @@ public class Agregando extends AppCompatActivity {
       //  Toast.makeText(this, lugar+horario+desc+ coord, Toast.LENGTH_SHORT).show();
         new agregarNuevo().execute(lugar,horario,desc,coord,gm_lat,gm_lng);
 
+
     }
-
-
 
     public void ifCorona(View view) {
 
@@ -125,6 +129,7 @@ public class Agregando extends AppCompatActivity {
 
                 if(succ == 1){
                     Agregando.this.finish();
+
                     return "ok";
                 }else{
                     return null;

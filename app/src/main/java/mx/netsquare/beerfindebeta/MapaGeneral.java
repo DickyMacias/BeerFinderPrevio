@@ -46,8 +46,8 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
     private static final String LOG_TAG = "Prueba: ";
 
-    private final String SERVICE_URL = "http://192.168.56.1:9090/webservice/get_all_markers.php";
-    private final String SERVICE_URL2 = "http://192.168.56.1:9090/webservice/get_all_negocios.php";
+    private final String SERVICE_URL = "http://www.beerfinderbeta.96.lt/webservice/get_all_markers.php";
+    private final String SERVICE_URL2 = "http://www.beerfinderbeta.96.lt/webservice/get_all_negocios.php";
 
 
     private JSONArray marcadores = null;

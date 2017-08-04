@@ -34,7 +34,7 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        _url = "http://192.168.56.1:9090/webservice/create_usuario.php";
+        _url = "http://beerfinderbeta.96.lt/webservice/create_usuario.php";
         jsonParser = new JSONParser();
 
         username  = (EditText)findViewById(R.id.editRegistroUsuario);

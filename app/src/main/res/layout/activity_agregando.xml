@@ -89,21 +89,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <Button
                 android:id="@+id/BtnIfTecate"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:onClick="ifTecate"
-                app:srcCompat="@drawable/tecate" />
+                android:text="Confirmar Marcador">
 
-            <ImageButton
-                android:id="@+id/btnIfCorona"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="ifCorona"
-                app:srcCompat="@drawable/corona" />
+            </Button>
+
+
         </LinearLayout>
 
     </LinearLayout>

@@ -1,12 +1,15 @@
+/*
 package mx.netsquare.beerfindebeta;
 
 import android.graphics.Bitmap;
 
 import java.util.HashMap;
 
+*/
 /**
  * Created by dicky on 7/11/2017.
- */
+ *//*
+
 
 public class Cervezas extends HashMap<String, String> {
 
@@ -75,3 +78,4 @@ public class Cervezas extends HashMap<String, String> {
         }
     }
 
+*/

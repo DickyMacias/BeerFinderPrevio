@@ -7,6 +7,7 @@ import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -29,7 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
-    public final static String LATITUD = null;
+    public static String LATITUD = null;
     public final static String LONGITUD = null;
     public static String COORDENADAS = null;
     private GoogleMap mMap;
@@ -57,19 +59,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Chihuahua.getCenter(), 12));
 
         //Crear Consulta para llamar puntos
+
         LatLng utch = new LatLng(28.6458775, -106.1475035);
         mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(utch));
 
 
-        mMap.getUiSettings().setAllGesturesEnabled(true);
+        UiSettings uisettings = mMap.getUiSettings();
+        uisettings.setAllGesturesEnabled(true);
+        uisettings.setMyLocationButtonEnabled(true);
 
 
         //Eventos a crear
         mMap.setOnInfoWindowClickListener(this);
-
         mMap.setOnMapClickListener(this);
-
         mMap.setOnMarkerClickListener(this);
 
 
@@ -86,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             Intent intent = new Intent(this, Agregando.class);
             intent.putExtra(LATITUD, marker.getPosition().latitude);
-        Toast.makeText(this, LATITUD + "ese no " + LONGITUD , Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, LATITUD + "ese no " + LONGITUD , Toast.LENGTH_SHORT).show();
             intent.putExtra(LONGITUD, marker.getPosition().longitude);
 
             startActivity(intent);
@@ -108,8 +111,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location location = new Location("Test");
         location.setLatitude(point.latitude);
         location.setLongitude(point.longitude);
-        //location.setTime(new Date().getTime()); //Set time as current Date
-        //info.setText(location.toString());
 
         //Convert Location to LatLng
         LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -121,22 +122,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(marker);
         COORDENADAS = newLatLng.toString();
 
-
-
-/*        MarkerOptions marker = new MarkerOptions().position(
-
-                new LatLng(point.latitude, point.longitude)) //Strings del fragmento se guardan en base de datos y de BD se traen con un select para almacenarlos en variable
-                    .title("New Marker")
-                    .snippet("Descripcion")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.corona));
-
-
-
-            mMap.addMarker(marker);*/
-
         Intent intent = new Intent(this, Agregando.class);
         intent.putExtra(LATITUD, marker.getPosition().latitude);
+        Log.e("Cual es la latitud: ", String.valueOf(marker.getPosition().latitude));
+        //LATITUD = String.valueOf(marker.getPosition().latitude);
         intent.putExtra(LONGITUD, marker.getPosition().longitude);
+        Log.e("Cual es la longitud: ", String.valueOf(marker.getPosition().longitude));
         intent.putExtra(COORDENADAS, newLatLng.toString());
         startActivity(intent);
 

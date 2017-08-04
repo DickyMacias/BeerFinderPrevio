@@ -76,7 +76,7 @@ public class MenuDesplegable extends AppCompatActivity
             Intent intentRegistro = new Intent(this, MapaGeneral.class);
             startActivity(intentRegistro);
         } else if (id == R.id.nav_slideshow) {
-            Intent intentRegistro = new Intent(this, MainActivity.class);
+            Intent intentRegistro = new Intent(this, Negocios.class);
             startActivity(intentRegistro);
         } else if (id == R.id.nav_manage) {
 

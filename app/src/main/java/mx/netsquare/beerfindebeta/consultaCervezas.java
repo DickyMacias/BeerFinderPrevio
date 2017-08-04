@@ -1,3 +1,4 @@
+/*
 package mx.netsquare.beerfindebeta;
 
 import android.app.Activity;
@@ -58,7 +59,7 @@ public class consultaCervezas extends Activity {
         super.onCreate(savedInstanceState);
         //  setContentView(R.layout.query);
 
-        _url ="http://192.168.56.1:9090/webservice/get_beers.php";
+        _url ="http://beerfinderbeta.96.lt/webservice/get_beers.php";
 
         record = new ArrayList<HashMap<String, String>>(); //Se guardan registros aqui
 
@@ -253,3 +254,4 @@ public class consultaCervezas extends Activity {
 
 
 
+*/

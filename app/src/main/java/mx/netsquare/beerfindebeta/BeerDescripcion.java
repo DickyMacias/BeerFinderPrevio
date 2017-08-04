@@ -1,3 +1,4 @@
+/*
 package mx.netsquare.beerfindebeta;
 
 import android.app.Activity;
@@ -28,9 +29,10 @@ public class BeerDescripcion extends AppCompatActivity {
             }
         });
 
-        mWebview .loadUrl("www.ironmaidenbeer.com/about");
+        mWebview .loadUrl("www.google.com");
         setContentView(mWebview);
     }
 
 
 }
+*/

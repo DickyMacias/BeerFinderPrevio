@@ -1,3 +1,4 @@
+/*
 
 
 
@@ -48,8 +49,6 @@ import static mx.netsquare.beerfindebeta.Preferencias.PREFS_URL;
 
 public class Beers extends ListActivity {
 
-    Context context;
-
     private ProgressDialog progressDialog=null;
     private JSONParser jsonParser = null; //Objeto conexion webservice
     private static String _url = null;
@@ -79,7 +78,7 @@ public class Beers extends ListActivity {
         super.onCreate(savedInstanceState);
         //  setContentView(R.layout.query);
 
-        _url ="http://192.168.56.1:9090/webservice/get_beers.php";
+        _url ="http://www.beerfinderbeta.96.lt/webservice/get_beers.php";
 
         record = new ArrayList<HashMap<String, String>>(); //Se guardan registros aqui
 
@@ -218,9 +217,37 @@ public class Beers extends ListActivity {
         }
     }
 
+    public class CustomAdapter extends BaseAdapter{
+        Context context;
+        LayoutInflater layoutInflater;
+        Picasso picasso;
+
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return null;
+        }
+    }
+
 
 
 }
 
 
 
+*/

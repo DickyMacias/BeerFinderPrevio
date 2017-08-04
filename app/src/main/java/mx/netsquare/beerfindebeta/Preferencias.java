@@ -15,7 +15,7 @@ public class Preferencias extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ip = "192.168.56.1:9090";
+        ip = "http://beerfinderbeta.96.lt";
         SharedPreferences preferencias = getSharedPreferences(PREFS_URL,0);
     }
 

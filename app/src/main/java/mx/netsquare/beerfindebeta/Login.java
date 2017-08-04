@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
 
     public void login(View view) {
 
-        _url ="http://192.168.56.1:9090/webservice/get_usuario.php";
+        _url ="http://www.beerfinderbeta.96.lt/webservice/get_usuario.php";
         info = new ArrayList<HashMap<String, String>>(); //Se guardan registros aqui
 
         user = user1.getText().toString();

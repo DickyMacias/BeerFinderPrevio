@@ -1,4 +1,5 @@
 package mx.netsquare.beerfindebeta;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,20 +9,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 /**
- * Created by dicky on 7/31/2017.
+ * Created by dicky on 8/1/2017.
  */
 
-public class MenuAdapter extends BaseAdapter {
+public class NegociosAdapter extends BaseAdapter {
 
     protected Activity activity;
     //ARRAYLIST CON TODOS LOS ITEMS
-    protected ArrayList<elemento> items;
+    protected ArrayList<Negocio> items;
 
     //CONSTRUCTOR
-    public MenuAdapter(Activity activity, ArrayList<elemento> items) {
+    public NegociosAdapter(Activity activity, ArrayList<Negocio> items) {
         this.activity = activity;
         this.items = items;
     }
@@ -45,25 +48,34 @@ public class MenuAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         // SE GENERA UN CONVERTVIEW POR MOTIVOS DE EFICIENCIA DE MEMORIA
         //ES UN NIVEL MAS BAJO DE VISTA, PARA QUE OCUPEN MENOS MEMORIA LAS
-
 //        IMAGENES
         View v = convertView;
-        //ASOCIAMOS LA VISTA AL LAYOUT DEL RECURSO XML DONDE ESTA LA BASE DE
 
+        //ASOCIAMOS LA VISTA AL LAYOUT DEL RECURSO XML DONDE ESTA LA BASE DE
 //        CADA ITEM
         if(convertView == null){
             LayoutInflater inf = (LayoutInflater) activity.getSystemService
 
                     (Context.LAYOUT_INFLATER_SERVICE);
-            v = inf.inflate(R.layout.item, null);
+            v = inf.inflate(R.layout.negocio_item, null);
         }
 
-        elemento dir = items.get(position);
+        Negocio dir = items.get(position);
         //RELLENAMOS LA IMAGEN Y EL TEXTO
-        ImageView foto = (ImageView) v.findViewById(R.id.imageItem);
-        foto.setImageDrawable(dir.getImagen());
-        TextView nombre = (TextView) v.findViewById(R.id.textoItem);
-        nombre.setText(dir.getTexto());
+
+
+ //       Picasso.with(this.context)
+   //             .load(dir.getURLImagen())
+     //           .placeholder(R.drawable.tarro_iphone1)
+       //         .error(R.drawable.tarro_iphone3)
+         //       .into(R.id.NegocioImagen);
+
+    //    ImageView foto = (ImageView) v.findViewById(R.id.NegocioImagen);
+      //  foto.setImageDrawable(dir.getImagen());
+        TextView lugar = (TextView) v.findViewById(R.id.NegocioNombre);
+        lugar.setText(dir.getLugar());
+        TextView desc = (TextView) v.findViewById(R.id.NegocioDireccion);
+        desc.setText(dir.getDescripcion());
 
         // DEVOLVEMOS VISTA
         return v;
