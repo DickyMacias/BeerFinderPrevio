@@ -11,11 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.loopj.android.image.SmartImageView
             android:id="@+id/BeerImagen"
             android:layout_width="110dp"
-            android:layout_height="110dp"
-            app:srcCompat="@drawable/tarro_iphone1" />
+            android:layout_height="110dp" />
 
         <Space
             android:layout_width="8dp"
@@ -32,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/beerNombre"
+                    android:id="@+id/txtBeerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -54,7 +53,7 @@
                     android:text="% Alcohol: " />
 
                 <TextView
-                    android:id="@+id/beerGrado"
+                    android:id="@+id/txtBeerGrados"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -75,7 +74,7 @@
                     android:text="Tipo" />
 
                 <TextView
-                    android:id="@+id/BeerTipo"
+                    android:id="@+id/txtBeerTipo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -96,7 +95,7 @@
                     android:text="Cervecera:" />
 
                 <TextView
-                    android:id="@+id/BeerCasa"
+                    android:id="@+id/txtBeerCasa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -116,7 +115,7 @@
                     android:layout_weight="10.88" />
 
                 <TextView
-                    android:id="@+id/BeerMas"
+                    android:id="@+id/txtBeerMas"
                     android:layout_width="71dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

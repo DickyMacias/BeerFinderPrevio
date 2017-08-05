@@ -45,4 +45,5 @@ dependencies {
     compile 'com.sun.mail:android-mail:1.5.5'
     compile 'com.sun.mail:android-activation:1.5.5'
     testCompile 'junit:junit:4.12'
+    compile files('libs/android-smart-image-view-1.0.0.jar')
 }
