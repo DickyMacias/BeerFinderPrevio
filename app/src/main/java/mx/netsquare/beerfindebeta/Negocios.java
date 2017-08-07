@@ -87,7 +87,6 @@ public class Negocios extends AppCompatActivity {
     }
 
 
-
     private void cargarImagen() {
 
         Lugar.clear();
