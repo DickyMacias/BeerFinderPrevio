@@ -90,11 +90,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/BtnIfTecate"
+                android:id="@+id/BtnAgregarLugar"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:onClick="ifTecate"
+                android:onClick="agregarLugar"
                 android:text="Confirmar Marcador">
 
             </Button>

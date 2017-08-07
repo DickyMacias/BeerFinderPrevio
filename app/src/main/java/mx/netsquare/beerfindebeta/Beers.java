@@ -52,7 +52,7 @@ public class Beers extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
 
         cargarImagen();
-        
+
     }
 
     private void cargarImagen() {
@@ -154,8 +154,6 @@ public class Beers extends AppCompatActivity {
             String urlImagen = "http://beerfinderbeta.96.lt/webservice/BeerImagen/"
                     + BeerImagen.get(position).toString();
             Log.e("LaURL: ", urlImagen);
-            Rect rect = new Rect(smartImageView.getLeft(), smartImageView.getTop(),
-                    smartImageView.getRight(), smartImageView.getBottom());
 
             smartImageView.setImageUrl(urlImagen);
 

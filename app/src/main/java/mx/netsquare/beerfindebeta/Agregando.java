@@ -24,13 +24,16 @@ import java.util.List;
 
 public class Agregando extends AppCompatActivity {
 
+    private static final String  _url = "http://beerfinderbeta.96.lt/webservice/create_place.php";
+
     private EditText lugar = null, horario = null, desc = null;
     private TextView  coordenadas = null;
     private TextView gm_lat = null;
     private TextView gm_lng = null;
     private JSONParser jsonParser = null;
     private ProgressDialog progressDialog;
-    private static String _url = null;
+
+
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_LUGAR    = "lugar";
     private static final String TAG_HORARIO    = "horario";
@@ -38,6 +41,9 @@ public class Agregando extends AppCompatActivity {
     private static final String TAG_COORD = "coordenadas";
     private static final String TAG_LATITUD    = "gm_lat";
     private static final String TAG_LONGITUD = "gm_lng";
+
+    private String lat;
+    private String lng;
 
 
 
@@ -47,7 +53,6 @@ public class Agregando extends AppCompatActivity {
         setContentView(R.layout.activity_agregando);
 
 
-        _url = "http://192.168.56.1:9090/webservice/create_place.php";
         jsonParser = new JSONParser();
 
         lugar  = (EditText)findViewById(R.id.editLugar);
@@ -58,13 +63,14 @@ public class Agregando extends AppCompatActivity {
         // Extraer lat. y lng.
         Intent intent = getIntent();
         String latlng = intent.getStringExtra(MapsActivity.COORDENADAS);
-        String lat = String.format(getString(R.string.marker_lat),
-                intent.getDoubleExtra(MapsActivity.LATITUD,0));
+        lat = //String.format(getString(R.string.marker_lat),
+                intent.getStringExtra("lat");
         //Toast.makeText(this, , Toast.LENGTH_SHORT).show();
-        String lng = String.format(getString(R.string.marker_lng),
-                intent.getDoubleExtra(MapsActivity.LONGITUD,0));
+        lng = //String.format(getString(R.string.marker_lng),
+                intent.getStringExtra("lon");
 
 
+        Toast.makeText(this,lat + " " + lng, Toast.LENGTH_LONG).show();
 
 
         // llenar campos
@@ -80,21 +86,24 @@ public class Agregando extends AppCompatActivity {
 
     }
 
-    public void ifTecate(View view) {
+    public void agregarLugar(View view) {
 
         String lugar  = this.lugar.getText().toString();
         String horario = this.horario.getText().toString();
         String desc  = this.desc.getText().toString();
         String coord = this.coordenadas.getText().toString();
+        //Log.e(" Si pasa: ", MapsActivity.LATITUD);
         String gm_lat = this.gm_lat.getText().toString();
+        //Log.e(" Si pasa: ", MapsActivity.LONGITUD);
         String gm_lng = this.gm_lng.getText().toString();
       //  Toast.makeText(this, lugar+horario+desc+ coord, Toast.LENGTH_SHORT).show();
-        new agregarNuevo().execute(lugar,horario,desc,coord,gm_lat,gm_lng);
 
+        new agregarNuevo().execute(lugar,horario,desc,coord, lat, lng);
 
-    }
+        finish();
 
-    public void ifCorona(View view) {
+        Intent intentRegistro = new Intent(this, MapaGeneral.class);
+        startActivity(intentRegistro);
 
 
     }
@@ -157,6 +166,7 @@ public class Agregando extends AppCompatActivity {
             }else{
                 Toast.makeText(Agregando.this, "Dato no agregado", Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 }

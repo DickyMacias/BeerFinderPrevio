@@ -75,7 +75,6 @@
             android:name=".MapaGeneral"
             android:label="@string/title_activity_mapa_general" />
         <activity android:name=".Beers" />
-        <activity android:name=".consultaCervezas" />
         <activity
             android:name=".MenuDesplegable"
             android:label="@string/title_activity_menu_desplegable"
@@ -86,8 +85,9 @@
                 android:value="mx.netsquare.beerfindebeta.Login" />
         </activity>
         <activity android:name=".MenuPrincipal" />
-        <activity android:name=".BeerDescripcion" />
         <activity android:name=".Negocios" />
+        <activity android:name=".WebNegocio" />
+        <activity android:name=".BeerDescripcion"></activity>
     </application>
 
 </manifest>

@@ -1,36 +1,35 @@
 package mx.netsquare.beerfindebeta;
 
-import android.app.ListActivity;
+import android.app.DownloadManager;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.squareup.picasso.Picasso;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.image.SmartImageView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
+import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,174 +37,179 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Negocios extends ListActivity {
+import cz.msebera.android.httpclient.Header;
 
-    private MenuItem item;
+import static mx.netsquare.beerfindebeta.R.id.NegocioDireccion;
+import static mx.netsquare.beerfindebeta.R.id.NegocioImagen;
+import static mx.netsquare.beerfindebeta.R.id.NegocioNombre;
 
-    private JSONParser jsonParser = null; //Objeto conexion webservice
+public class Negocios extends AppCompatActivity {
 
-    private static final String TAG_PLACES = "negocios";
+    private final String SERVICE_URL = "http://www.beerfinderbeta.96.lt/webservice/get_negocios.php";
 
-    private static final String LOG_TAG = "Prueba: ";
+    public static String URL_WEB = null;
 
-    private final String SERVICE_URL = "http://beerfinderbeta.96.lt/webservice/get_all_negocios2.php";
+    private GridView gridView;
 
-    private JSONArray negocios = null;
-    private ProgressDialog progressDialog;
-
-    private ImageView imagen;
-
-
+    ArrayList Lugar = new ArrayList();
+    ArrayList Descripcion  = new ArrayList();
+    ArrayList Web  = new ArrayList();
+    ArrayList NegocioImagen  = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_negocios);
 
+        gridView = (GridView)findViewById(R.id.gridView);
+
+        cargarImagen();
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder direccion = new AlertDialog.Builder(Negocios.this);
+                direccion.setMessage(Descripcion.get(position).toString()).setCancelable(false)
+                        .setPositiveButton("Website", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intento = new Intent(getApplicationContext(), WebNegocio.class);
+                                URL_WEB = Web.get(position).toString();
+                                intento.putExtra("web", URL_WEB);
+                                startActivity(intento);
+                                Negocios.this.finish();
+                            }
+                        })
+                        .setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Negocios.this.finish();
+
+                            }
+                        });
+                direccion.show();
+
+            }
+        });
+    }
 
 
-        new BusinessTask().execute();
+
+    private void cargarImagen() {
+
+        Lugar.clear();
+        Descripcion.clear();
+        Web.clear();
+        NegocioImagen.clear();
 
 
+        AsyncHttpClient con = new AsyncHttpClient();
+        con.get(SERVICE_URL,
+                new AsyncHttpResponseHandler() {
+
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        if (statusCode == 200) {
+
+                            try {
+                                Log.e("El Json: ", responseBody.toString());
+//                        JSONObject ob = new JSONObject(String.valueOf(responseBody));
+//                        JSONArray jsonArray = ob.getJSONArray("cervezas");
+//                        Log.e("Este es el Json: ", jsonArray.toString());
+
+                                JSONArray jsonArray = new JSONArray(new String(responseBody));
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    Lugar.add(jsonArray.getJSONObject(i).getString("lugar"));
+                                    Descripcion.add(jsonArray.getJSONObject(i).getString("descripcion"));
+                                    Web.add(jsonArray.getJSONObject(i).getString("web"));
+                                    NegocioImagen.add(jsonArray.getJSONObject(i).getString("urlimagen"));
+
+                                }
+
+                                gridView.setAdapter(new NegocioAdapter(getApplicationContext()));
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers,
+                                          byte[] responseBody, Throwable error) {
+
+                    }
+                });
 
 
     }
 
-    class BusinessTask extends AsyncTask<Void, Void, String> {
 
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
-            negocios = new JSONArray();
 
-        }
+    private class NegocioAdapter extends BaseAdapter {
 
-        @Override
-        protected String doInBackground(Void... args) {
+        Context context;
+        LayoutInflater layoutInflater;
+        SmartImageView smartImageView;
+        TextView txtNegocioNombre, txtNegocioDireccion;
 
-            HttpURLConnection conn = null;
-            final StringBuilder json = new StringBuilder();
-            try {
-                // Conectando con el web service
-                URL url = new URL(SERVICE_URL);
-                conn = (HttpURLConnection) url.openConnection();
-                InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
-                // Leer informacion del Json en el Builder
-                int read;
-                char[] buff = new char[1024];
-                while ((read = in.read(buff)) != -1) {
-                    json.append(buff, 0, read);
-                }
 
-            } catch (IOException e) {
-                Log.e(LOG_TAG, "Error connecting to service", e);
 
-            } finally {
-                if (conn != null) {
-                    conn.disconnect();
-                }
-            }
 
-            return json.toString();
+        public NegocioAdapter(Context applicationContext) {
 
+            this.context = applicationContext;
+            layoutInflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
 
         @Override
-        protected void onPostExecute(String json) {
-
-            Log.e("No funciona", SERVICE_URL);
-            Log.e("Error", json.toString());
-
-            try {
-
-                JSONObject ob = new JSONObject(json);
-                JSONArray arr = ob.getJSONArray("negocios");
-
-
-                ArrayList<Negocio> lugares =
-                        Negocios.parseJsonToObject(arr);
-
-
-                if (lugares == null)
-                    Log.e("Error", "No es nulo");
-
-
-                Negocio n = null;
-
-                for (int i = 0; i < lugares.size(); i++) {
-
-                    n = lugares.get(i);
-
-                    Log.e("Lista a desplegar ", n.toString());
-
-                    ListView lista = (ListView) findViewById(R.id.list_negocios);
-                    ArrayList<Negocio> negocios = new ArrayList<Negocio>();
-
-                    //NegociosAdapter adaptador = new NegociosAdapter(this, negocios);
-                    //Log.e("Si pasa a adapter: ", negocios.toString());
-                    //lista.setAdapter(adaptador);
-
-                    //new download().execute(n.getURLImagen());
-
-                }
-
-
-            } catch (Exception e) {
-                Log.e(LOG_TAG, "Error generando marcadores de espacios", e);
-            }
-
+        public int getCount() {
+            return NegocioImagen.size();
 
         }
 
         @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
+        public Object getItem(int position) {
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewGroup viewGroup = (ViewGroup)layoutInflater.inflate(R.layout.negocio, null);
+
+            smartImageView = (SmartImageView) viewGroup.findViewById(R.id.NegocioImagen);
+            txtNegocioNombre = (TextView) viewGroup.findViewById(R.id.NegocioNombre);
+            txtNegocioDireccion = (TextView) viewGroup.findViewById(R.id.NegocioDireccion);
+
+            String urlImagen = "http://beerfinderbeta.96.lt/webservice/NegocioImagen/"
+                    + NegocioImagen.get(position).toString();
+            Log.e("LaURL: ", urlImagen);
+
+            smartImageView.setImageUrl(urlImagen);
+
+            txtNegocioNombre.setText(Lugar.get(position).toString());
+            txtNegocioDireccion.setText(Descripcion.get(position).toString());
+
+
+            return viewGroup;
 
 
 
         }
     }
-
-    public static ArrayList<Negocio> parseJsonToObject(JSONArray arrJson) {
-
-        ArrayList<Negocio> negocios = new ArrayList<Negocio>();
-
-        try {
-            //JSONArray jsonArray = new JSONArray(json);
-
-
-            for (int i = 0; i < arrJson.length(); i++) {
-                JSONObject jsonObj = arrJson.getJSONObject(i);
-
-                Log.e("Info", "--------------- Ini Json ------------------");
-
-
-                Negocio n = new Negocio();
-                n.setLugar(jsonObj.getString("lugar"));
-                n.setDescripcion(jsonObj.getString("descripcion"));
-                n.setURLImagen(jsonObj.getString("urlimagen"));
-
-                Log.e("Info", n.toString());
-
-                Log.e("Info", "-------------------------------------------");
-
-                negocios.add(n);
-            }
-        } catch (JSONException e) {
-            Log.e("Negocios", "Error procesando el JSON");
-        }
-
-        Log.e("Negocios count", "" + negocios.size());
-
-        return negocios;
-
-    }
-
-
 
 }
 

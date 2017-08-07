@@ -3,19 +3,11 @@ package mx.netsquare.beerfindebeta;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Recuperar extends AppCompatActivity {
-
-    String user;
-    String passwd;
-    String destinatario;
+public class BeerDescripcion extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recuperar);
-
-    //Generar consulta para traer destinatario desde TextArea
-
-
+        setContentView(R.layout.activity_beer_descripcion);
     }
 }

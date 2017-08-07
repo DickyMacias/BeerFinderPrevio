@@ -23,7 +23,7 @@ public class Inicio extends AppCompatActivity {
         @Override
         public void run() {
             //Crear intento para lanzar login
-            Intent intentLogin = new Intent(Inicio.this, MenuDesplegable.class);
+            Intent intentLogin = new Intent(Inicio.this, Login.class);
             Inicio.this.startActivity(intentLogin);
             Inicio.this.finish();
         }

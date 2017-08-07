@@ -11,11 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.loopj.android.image.SmartImageView
             android:id="@+id/NegocioImagen"
             android:layout_width="110dp"
-            android:layout_height="110dp"
-            app:srcCompat="@drawable/tarro_iphone1" />
+            android:layout_height="110dp" />
 
         <Space
             android:layout_width="8dp"

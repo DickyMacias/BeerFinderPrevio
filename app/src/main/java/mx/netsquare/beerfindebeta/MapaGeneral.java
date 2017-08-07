@@ -75,10 +75,10 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
             mMap.clear();
             new MarkerTask().execute();
             new NegocioTask().execute();
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Chihuahua.getCenter(), 15));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Chihuahua.getCenter(), 14));
         }
 
-        mMap.setMaxZoomPreference(15.0f);
+        //mMap.setMaxZoomPreference(15.0f);
 
         UiSettings uisettings = mMap.getUiSettings();
         uisettings.setAllGesturesEnabled(true);
@@ -284,7 +284,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
 
                     mMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                             .title(m.getLugar())
                             .snippet(m.getDescripcion())
                             .position(latLng));
@@ -321,5 +321,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
     public void AgregaLugar(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
+        finish();
+
     }
 }
