@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- No son traducibles a otros idiomas-->
+    <string name="app_name">Beer Finder Beta</string>
+    <string name="title_activity_maps">Beer Finder</string>
+    <string name="facebook_app_id">0918273645</string>
+    <string name="fb_login_protocol_scheme">fb0918273645</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="textview">TextView</string>
+    <!--    Si se modifica el formato no funciona. Tener cuidado del orden y que siempre quede 1 y luego 2 en caso de ser multiples coordenadas-->
+    <string name="marker_latlng"> </string>
+    <string name="marker_lat">%1$.14f</string>
+    <string name="marker_lng">%1$.14f</string>
+
+
+    <!--    strings que se necesitan traducir para multilenguaje-->
+
+    <string name="usuario">User</string>
+    <string name="contrasena">Password</string>
+    <string name="olvidoContrasena">Forgot your password?</string>
+    <string name="accesar">Log in</string>
+    <string name="escribaUsuario">Enter your username...</string>
+    <string name="email">Email</string>
+    <string name="confirmarContrasena">Confirm your password</string>
+    <string name="telefono">Phone</string>
+    <string name="registrarse">Sign in</string>
+    <string name="title_activity_mapa_general">Map</string>
+    <string name="title_activity_menu_desplegable">Drop-down Menu</string>
+    <string name="action_settings">Settings</string>
+    <string name="dialog_creando_nuevo_lugar">Creating new place</string>
+    <string name="hecho">Done</string>
+    <string name="dato_agregado">Information was added</string>
+    <string name="dato_no_agregado">Information was not added</string>
+    <string name="autenticando">Authenticating...</string>
+    <string name="user_pass_incorrectos">Incorrect username or password</string>
+    <string name="cargando">Loading...</string>
+    <string name="no_localizable">We could not locate you, we will use UTCH as reference</string>
+    <string name="sin_permisos">The application does not have permission to use your location will be used</string>
+    <string name="utch_referencia">UTCH as reference</string>
+    <string name="website">Website</string>
+    <string name="cerrar">Close</string>
+    <string name="pass_no_coincide">Password does not match. Verify password again.</string>
+    <string name="creando_usuario">Creating new user</string>
+    <string name="usuario_registrado">User was registered</string>
+    <string name="usuario_no_registrado">User was not registered</string>
+    <string name="lugar">Place</string>
+    <string name="horario">Business hours</string>
+    <string name="descripcion">Description</string>
+    <string name="confirmar_marcador">Confirm Bookmark</string>
+    <string name="agregar_ubicacion">Add Location</string>
+    <string name="recuperar_pass">Retrieve Password</string>
+    <string name="user">Username</string>
+    <string name="correo_e">Email</string>
+    <string name="introducir_nombre">Enter username</string>
+    <string name="introducir_email">Enter email</string>
+    <string name="enviar">Submit</string>
+    <string name="tipo">Type:</string>
+    <string name="cervecera">Brewery:</string>
+    <string name="mas">More...</string>
+    <string name="alcohol">% Alcohol:</string>
+    <string name="bienvenido_a">Welcome to Beer Finder</string>
+    <string name="menu_nombre">Menu</string>
+    <string name="direccion">Address:</string>
+    <string name="cervezas">Beers</string>
+    <string name="lugares">Bookmarks</string>
+
+</resources>

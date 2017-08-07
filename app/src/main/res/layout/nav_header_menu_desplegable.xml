@@ -17,7 +17,7 @@
         android:layout_width="47dp"
         android:layout_height="59dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
+        app:srcCompat="@drawable/icono" />
 
     <TextView
         android:layout_width="match_parent"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- No son traducibles a otros idiomas-->
+    <string name="app_name">Beer Finder Beta</string>
+    <string name="title_activity_maps">Beer Finder</string>
+    <string name="facebook_app_id">0918273645</string>
+    <string name="fb_login_protocol_scheme">fb0918273645</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="textview">TextView</string>
+    <!--    Si se modifica el formato no funciona. Tener cuidado del orden y que siempre quede 1 y luego 2 en caso de ser multiples coordenadas-->
+    <string name="marker_latlng"> </string>
+    <string name="marker_lat">%1$.14f</string>
+    <string name="marker_lng">%1$.14f</string>
+
+
+    <!--    strings que se necesitan traducir para multilenguaje-->
+
+    <string name="usuario">ユーザー</string>
+    <string name="contrasena">パスワード</string>
+    <string name="olvidoContrasena">パスワードをお忘れですか？</string>
+    <string name="accesar">ログイン</string>
+    <string name="escribaUsuario">ユーザー名を入力して下さい...</string>
+    <string name="email">Eメール</string>
+    <string name="confirmarContrasena">パスワードを認証する</string>
+    <string name="telefono">電話</string>
+    <string name="registrarse">サインイン</string>
+    <string name="title_activity_mapa_general">地図</string>
+    <string name="title_activity_menu_desplegable">ドロップダウンメニュー</string>
+    <string name="action_settings">設定</string>
+    <string name="dialog_creando_nuevo_lugar">新しい場所を作る</string>
+    <string name="hecho">完了</string>
+    <string name="dato_agregado">情報が追加されました</string>
+    <string name="dato_no_agregado">情報が追加されなかった</string>
+    <string name="autenticando">認証中...</string>
+    <string name="user_pass_incorrectos">ユーザーネームまたはパスワードが違います</string>
+    <string name="cargando">読み込んでいます...</string>
+    <string name="no_localizable">私たちはあなたを見つけることができませんでした、我々は参照としてUTCHを使用します</string>
+    <string name="sin_permisos">私たちはあなたを見つけることができませんでした、我々は参照としてUTCHを使用します</string>
+    <string name="utch_referencia">リファレンスとしてのUTCH</string>
+    <string name="website">ウェブサイト</string>
+    <string name="cerrar">閉じる</string>
+    <string name="pass_no_coincide">パスワードが一致しません。 パスワードを再度確認してください。</string>
+    <string name="creando_usuario">新規ユーザーの作成</string>
+    <string name="usuario_registrado">ユーザーが登録されました</string>
+    <string name="usuario_no_registrado">ユーザーは登録されていません</string>
+    <string name="lugar">場所</string>
+    <string name="horario">営業時間</string>
+    <string name="descripcion">説明</string>
+    <string name="confirmar_marcador">ブックマークを確認する</string>
+    <string name="agregar_ubicacion">場所を追加</string>
+    <string name="recuperar_pass">パスワードの取得</string>
+    <string name="user">ユーザー</string>
+    <string name="correo_e">Eメール</string>
+    <string name="introducir_nombre">ユーザー名を入力</string>
+    <string name="introducir_email">メールアドレスを入力して</string>
+    <string name="enviar">提出する</string>
+    <string name="tipo">タイプ:</string>
+    <string name="cervecera">醸造所：</string>
+    <string name="mas">もっと...</string>
+    <string name="alcohol">％アルコール：</string>
+    <string name="bienvenido_a">ビールファインダーへようこそ</string>
+    <string name="menu_nombre">メニュー</string>
+    <string name="direccion">住所：</string>
+    <string name = "cervezas">ビールス</string>
+    <string name = "lugares">ブックマーク</string>
+
+</resources>
