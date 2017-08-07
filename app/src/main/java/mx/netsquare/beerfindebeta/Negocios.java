@@ -1,18 +1,11 @@
 package mx.netsquare.beerfindebeta;
 
-import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,28 +13,24 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.image.SmartImageView;
 
-import org.apache.http.NameValuePair;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 import cz.msebera.android.httpclient.Header;
 
-import static mx.netsquare.beerfindebeta.R.id.NegocioDireccion;
-import static mx.netsquare.beerfindebeta.R.id.NegocioImagen;
-import static mx.netsquare.beerfindebeta.R.id.NegocioNombre;
+
 
 public class Negocios extends AppCompatActivity {
 
@@ -89,10 +78,12 @@ public class Negocios extends AppCompatActivity {
 
                             }
                         });
+
                 direccion.show();
 
             }
         });
+
     }
 
 
@@ -192,7 +183,7 @@ public class Negocios extends AppCompatActivity {
 
             smartImageView = (SmartImageView) viewGroup.findViewById(R.id.NegocioImagen);
             txtNegocioNombre = (TextView) viewGroup.findViewById(R.id.NegocioNombre);
-            txtNegocioDireccion = (TextView) viewGroup.findViewById(R.id.NegocioDireccion);
+        //    txtNegocioDireccion = (TextView) viewGroup.findViewById(R.id.NegocioDireccion);
 
             String urlImagen = "http://beerfinderbeta.96.lt/webservice/NegocioImagen/"
                     + NegocioImagen.get(position).toString();
@@ -201,7 +192,7 @@ public class Negocios extends AppCompatActivity {
             smartImageView.setImageUrl(urlImagen);
 
             txtNegocioNombre.setText(Lugar.get(position).toString());
-            txtNegocioDireccion.setText(Descripcion.get(position).toString());
+        //    txtNegocioDireccion.setText(Descripcion.get(position).toString());
 
 
             return viewGroup;

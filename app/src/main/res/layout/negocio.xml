@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
     android:orientation="vertical">
 
     <TextView
@@ -18,8 +25,8 @@
 
     <com.loopj.android.image.SmartImageView
         android:id="@+id/NegocioImagen"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center" />
 
     <TextView
@@ -29,14 +36,14 @@
         android:gravity="center"
         android:text="Direccion:" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/NegocioDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
         android:text="TextView"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />-->
 
     <TextView
         android:id="@+id/NegocioMas"
