@@ -115,7 +115,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location location = lm.getLastKnownLocation(bestProvider);
 
         if (location == null){
-            Toast.makeText(this,"No pudimos localizarte, utilizaremos UTCH como referencia",
+            Toast.makeText(this, R.string.no_localizable,
                     Toast.LENGTH_LONG).show();
             localizado = true;
             setUpMap();
@@ -162,8 +162,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             } else {
 
-                Toast.makeText(this, "La app no tiene permiso de usar tu ubicación se utilizará " +
-                                "UTCH como referencia"
+                Toast.makeText(this, getString(R.string.sin_permisos) +
+                                getString(R.string.utch_referencia)
                         , Toast.LENGTH_LONG).show();
 
                 localizado = true;

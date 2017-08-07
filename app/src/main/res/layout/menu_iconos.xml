@@ -11,12 +11,12 @@
         android:id="@+id/txtMenuName"
         android:layout_width="147dp"
         android:layout_height="wrap_content"
-        android:text="Menu Nombre" />
+        android:text="@string/menu_nombre" />
 
     <TextView
         android:id="@+id/txtMenuDesc"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Descripcion" />
+        android:text="@string/descripcion" />
 
 </LinearLayout>

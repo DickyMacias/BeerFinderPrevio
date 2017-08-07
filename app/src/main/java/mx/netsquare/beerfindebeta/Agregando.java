@@ -105,7 +105,7 @@ public class Agregando extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = new ProgressDialog(Agregando.this);
-            progressDialog.setMessage("Creando nuevo lugar");
+            progressDialog.setMessage(getString(R.string.dialog_creando_nuevo_lugar));
             progressDialog.setCancelable(true);
             progressDialog.show();
         }
@@ -128,7 +128,7 @@ public class Agregando extends AppCompatActivity {
                 if(succ == 1){
                     Agregando.this.finish();
 
-                    return "ok";
+                    return getString(R.string.hecho);
                 }else{
                     return null;
                 }
@@ -150,10 +150,10 @@ public class Agregando extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressDialog.dismiss();
-            if(s.equals("ok")){
-                Toast.makeText(Agregando.this, "Dato agregado", Toast.LENGTH_SHORT).show();
+            if(s.equals(R.string.hecho)){
+                Toast.makeText(Agregando.this, R.string.dato_agregado, Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(Agregando.this, "Dato no agregado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Agregando.this, R.string.dato_no_agregado, Toast.LENGTH_SHORT).show();
             }
 
         }

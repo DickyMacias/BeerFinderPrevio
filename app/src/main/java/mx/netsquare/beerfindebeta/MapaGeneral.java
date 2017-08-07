@@ -86,7 +86,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
                 marcadores = new JSONArray();
 
                 progressDialog = new ProgressDialog(MapaGeneral.this);
-                progressDialog.setMessage("Cargando...");
+                progressDialog.setMessage(getString(R.string.cargando));
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 

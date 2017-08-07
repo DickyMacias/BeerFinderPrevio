@@ -50,7 +50,7 @@
                     android:id="@+id/textView"
                     android:layout_width="72dp"
                     android:layout_height="wrap_content"
-                    android:text="% Alcohol: " />
+                    android:text="@string/alcohol" />
 
                 <TextView
                     android:id="@+id/txtBeerGrados"
@@ -71,7 +71,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="73dp"
                     android:layout_height="wrap_content"
-                    android:text="Tipo" />
+                    android:text="@string/tipo" />
 
                 <TextView
                     android:id="@+id/txtBeerTipo"
@@ -92,7 +92,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="69dp"
                     android:layout_height="wrap_content"
-                    android:text="Cervecera:" />
+                    android:text="@string/cervecera" />
 
                 <TextView
                     android:id="@+id/txtBeerCasa"
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:keepScreenOn="true"
-                    android:text="Mas..." />
+                    android:text="@string/mas" />
             </LinearLayout>
 
         </LinearLayout>

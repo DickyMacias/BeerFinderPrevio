@@ -26,7 +26,7 @@
             android:id="@+id/txtLugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lugar" />
+            android:text="@string/lugar" />
 
         <EditText
             android:id="@+id/editLugar"
@@ -40,7 +40,7 @@
             android:id="@+id/txtHorario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Horario" />
+            android:text="@string/horario" />
 
         <EditText
             android:id="@+id/editHorario"
@@ -54,7 +54,7 @@
             android:id="@+id/txtDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripcion" />
+            android:text="@string/descripcion" />
 
         <EditText
             android:id="@+id/editDesc"
@@ -94,8 +94,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_weight="1"
+                android:background="@color/accent"
+                android:elevation="8dp"
                 android:onClick="agregarLugar"
-                android:text="Confirmar Marcador">
+                android:text="@string/confirmar_marcador"
+                android:textColor="@color/cardview_light_background">
 
             </Button>
 

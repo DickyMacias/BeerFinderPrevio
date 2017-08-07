@@ -15,10 +15,12 @@
 
     <Button
         android:id="@+id/btnAgrPlace"
-        android:onClick="AgregaLugar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Agregar Ubicacion" />
+        android:background="@color/accent"
+        android:onClick="AgregaLugar"
+        android:text="@string/agregar_ubicacion"
+        android:textColor="@color/cardview_light_background" />
 
 
 </LinearLayout>

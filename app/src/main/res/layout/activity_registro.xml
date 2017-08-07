@@ -38,14 +38,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/escribaUsuario"
             android:inputType="textPersonName"
             android:paddingBottom="16dp"
             android:paddingEnd="8dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:text="@string/escribaUsuario" />
+            android:paddingTop="8dp" />
 
         <TextView
             android:id="@+id/txtRegistroEmail"
@@ -154,9 +154,11 @@
 
         <Button
             android:id="@+id/btnRegistrar"
-            android:onClick="registrando"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/registrarse" />
+            android:background="@color/accent"
+            android:onClick="registrando"
+            android:text="@string/registrarse"
+            android:textColor="@color/cardview_light_background" />
     </LinearLayout>
 </android.widget.RelativeLayout>

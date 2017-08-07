@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Direccion:" />
+        android:text="@string/direccion" />
 
     <!--<TextView
         android:id="@+id/NegocioDireccion"
@@ -52,6 +52,6 @@
         android:layout_weight="1"
         android:gravity="right"
         android:keepScreenOn="true"
-        android:text="Mas..." />
+        android:text="@string/mas" />
 
 </LinearLayout>

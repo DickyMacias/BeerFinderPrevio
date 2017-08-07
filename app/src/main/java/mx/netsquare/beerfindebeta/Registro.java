@@ -59,7 +59,7 @@ public class Registro extends AppCompatActivity {
 
         //Toast.makeText(this, username+email+password+password2+telefono, Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(this, "Contrasena no coincide, Verificar contrasena nuevamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.pass_no_coincide, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -70,7 +70,7 @@ public class Registro extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = new ProgressDialog(Registro.this);
-            progressDialog.setMessage("Creando nuevo usuario");
+            progressDialog.setMessage(getString(R.string.creando_usuario));
             progressDialog.setCancelable(true);
             progressDialog.show();
         }
@@ -91,7 +91,7 @@ public class Registro extends AppCompatActivity {
 
                 if(succ == 1){
                     Registro.this.finish();
-                    return "ok";
+                    return getString(R.string.hecho);
                 }else{
                     return null;
                 }
@@ -114,9 +114,9 @@ public class Registro extends AppCompatActivity {
             super.onPostExecute(s);
             progressDialog.dismiss();
             if(s.equals("ok")){
-                Toast.makeText(Registro.this, "Usuario Regsitrado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Registro.this, R.string.usuario_registrado, Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(Registro.this, "Usuario no Registrado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Registro.this, R.string.usuario_no_registrado, Toast.LENGTH_SHORT).show();
             }
         }
 

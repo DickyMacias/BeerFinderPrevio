@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity {
             usuarios = new JSONArray();
 
             progressDialog = new ProgressDialog(Login.this);
-            progressDialog.setMessage("Autenticando...");
+            progressDialog.setMessage(getString(R.string.autenticando));
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -150,7 +150,7 @@ public class Login extends AppCompatActivity {
 
 
             } else {
-                Toast.makeText(Login.this, "Usuario o Contrasena Incorrectos", Toast.LENGTH_SHORT)
+                Toast.makeText(Login.this, R.string.user_pass_incorrectos, Toast.LENGTH_SHORT)
                         .show();
             }
 

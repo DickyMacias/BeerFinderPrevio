@@ -106,14 +106,6 @@
             android:onClick="recuperar"/>
 
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/facebook_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="38dp"
@@ -123,8 +115,10 @@
             android:id="@+id/btnlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/accent"
             android:onClick="login"
-            android:text="@string/accesar" />
+            android:text="@string/accesar"
+            android:textColor="@color/cardview_light_background" />
 
 
     </LinearLayout>

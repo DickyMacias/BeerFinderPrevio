@@ -59,7 +59,7 @@ public class Negocios extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder direccion = new AlertDialog.Builder(Negocios.this);
                 direccion.setMessage(Descripcion.get(position).toString()).setCancelable(false)
-                        .setPositiveButton("Website", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.website, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -70,7 +70,7 @@ public class Negocios extends AppCompatActivity {
                                 //Negocios.this.finish();
                             }
                         })
-                        .setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.cerrar, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 

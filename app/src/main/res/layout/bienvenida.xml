@@ -11,11 +11,11 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Bienvenido a Beer Finder"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="@string/bienvenido_a"
+        android:textAppearance="@android:style/TextAppearance.Material.Large" />
 
     <ImageView
         android:id="@+id/imageView5"
