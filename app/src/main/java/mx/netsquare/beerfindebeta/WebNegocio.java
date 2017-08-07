@@ -12,28 +12,31 @@ public class WebNegocio extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         mWebview  = new WebView(this);
 
-        mWebview.getSettings().setJavaScriptEnabled(true); // enable javascript
+        // activar javascript
+        mWebview.getSettings().setJavaScriptEnabled(true);
 
+        // declarar actividad
         final Activity activity = this;
 
+        // se configura el cliente con funciones de la clase WebView
+        // Selecciona la vista y carga desde donde se llenara
         mWebview.setWebViewClient(new WebViewClient() {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 Toast.makeText(activity, description, Toast.LENGTH_SHORT).show();
             }
         });
+
+        //Se arrastra la informacion del intent anterior para obtener la url
         Intent intent = getIntent();
         mWebview .loadUrl(intent.getStringExtra("web"));
         setContentView(mWebview);
-
-
-
     }
 
+    // Al seleccionar atras se termina el intent
     @Override
     public void onBackPressed() {
         super.onBackPressed();

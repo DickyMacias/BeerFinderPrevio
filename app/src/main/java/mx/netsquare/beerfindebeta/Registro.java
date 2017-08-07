@@ -56,6 +56,7 @@ public class Registro extends AppCompatActivity {
 
         if (password.equals(password2))
         new registrarNuevo().execute(username,email,password,telefono);
+
         //Toast.makeText(this, username+email+password+password2+telefono, Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "Contrasena no coincide, Verificar contrasena nuevamente", Toast.LENGTH_SHORT).show();
@@ -118,5 +119,6 @@ public class Registro extends AppCompatActivity {
                 Toast.makeText(Registro.this, "Usuario no Registrado", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 }
