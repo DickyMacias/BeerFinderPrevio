@@ -10,19 +10,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.gson.Gson;
-
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,8 +49,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
 
         user1 = (EditText) findViewById(R.id.llenarUsuario);
         pass1 = (EditText) findViewById(R.id.llenarContrasena);
@@ -175,7 +165,7 @@ public class Login extends AppCompatActivity {
         }
 
         public void recuperar(View view) {
-            Intent intentMap = new Intent(getApplicationContext(), Beers.class);
+            Intent intentMap = new Intent(getApplicationContext(), Recuperar.class);
             startActivity(intentMap);
 
         }

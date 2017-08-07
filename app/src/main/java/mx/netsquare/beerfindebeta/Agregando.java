@@ -1,26 +1,26 @@
 package mx.netsquare.beerfindebeta;
 
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.MapsInitializer;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Agregando extends AppCompatActivity {
 
@@ -63,15 +63,10 @@ public class Agregando extends AppCompatActivity {
         // Extraer lat. y lng.
         Intent intent = getIntent();
         String latlng = intent.getStringExtra(MapsActivity.COORDENADAS);
-        lat = //String.format(getString(R.string.marker_lat),
-                intent.getStringExtra("lat");
-        //Toast.makeText(this, , Toast.LENGTH_SHORT).show();
-        lng = //String.format(getString(R.string.marker_lng),
-                intent.getStringExtra("lon");
-
+        lat = intent.getStringExtra("lat");
+        lng = intent.getStringExtra("lon");
 
         Toast.makeText(this,lat + " " + lng, Toast.LENGTH_LONG).show();
-
 
         // llenar campos
         coordenadas = (TextView) findViewById(R.id.txtLatLng);
@@ -81,10 +76,8 @@ public class Agregando extends AppCompatActivity {
         gm_lng = (TextView)findViewById(R.id.txtLng);
         gm_lng.setText(lng);
 
-
-
-
     }
+
 
     public void agregarLugar(View view) {
 
@@ -92,21 +85,18 @@ public class Agregando extends AppCompatActivity {
         String horario = this.horario.getText().toString();
         String desc  = this.desc.getText().toString();
         String coord = this.coordenadas.getText().toString();
-        //Log.e(" Si pasa: ", MapsActivity.LATITUD);
-        String gm_lat = this.gm_lat.getText().toString();
-        //Log.e(" Si pasa: ", MapsActivity.LONGITUD);
-        String gm_lng = this.gm_lng.getText().toString();
-      //  Toast.makeText(this, lugar+horario+desc+ coord, Toast.LENGTH_SHORT).show();
 
+
+        //Lat y lng pasan directo sin ser llamadas desde el txtView
         new agregarNuevo().execute(lugar,horario,desc,coord, lat, lng);
 
         finish();
 
         Intent intentRegistro = new Intent(this, MapaGeneral.class);
         startActivity(intentRegistro);
-
-
     }
+
+
 
     class agregarNuevo extends AsyncTask<String, String, String> {
 
@@ -130,7 +120,6 @@ public class Agregando extends AppCompatActivity {
                 Params.add(new BasicNameValuePair(TAG_COORD,params[3]));
                 Params.add(new BasicNameValuePair(TAG_LATITUD,params[4]));
                 Params.add(new BasicNameValuePair(TAG_LONGITUD,params[5]));
-
 
                 JSONObject json = jsonParser.makeHttpRequest(_url,"POST",Params);
 

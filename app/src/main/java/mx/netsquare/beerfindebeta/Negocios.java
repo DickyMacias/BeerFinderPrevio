@@ -67,14 +67,14 @@ public class Negocios extends AppCompatActivity {
                                 URL_WEB = Web.get(position).toString();
                                 intento.putExtra("web", URL_WEB);
                                 startActivity(intento);
-                                Negocios.this.finish();
+                                //Negocios.this.finish();
                             }
                         })
                         .setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                Negocios.this.finish();
+                                //Negocios.this.finish();
 
                             }
                         });
@@ -106,9 +106,6 @@ public class Negocios extends AppCompatActivity {
 
                             try {
                                 Log.e("El Json: ", responseBody.toString());
-//                        JSONObject ob = new JSONObject(String.valueOf(responseBody));
-//                        JSONArray jsonArray = ob.getJSONArray("cervezas");
-//                        Log.e("Este es el Json: ", jsonArray.toString());
 
                                 JSONArray jsonArray = new JSONArray(new String(responseBody));
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -135,11 +132,7 @@ public class Negocios extends AppCompatActivity {
                     }
                 });
 
-
     }
-
-
-
 
 
     private class NegocioAdapter extends BaseAdapter {
@@ -148,9 +141,6 @@ public class Negocios extends AppCompatActivity {
         LayoutInflater layoutInflater;
         SmartImageView smartImageView;
         TextView txtNegocioNombre, txtNegocioDireccion;
-
-
-
 
 
         public NegocioAdapter(Context applicationContext) {
@@ -195,8 +185,6 @@ public class Negocios extends AppCompatActivity {
 
 
             return viewGroup;
-
-
 
         }
     }

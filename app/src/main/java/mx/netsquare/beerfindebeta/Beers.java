@@ -1,10 +1,6 @@
 package mx.netsquare.beerfindebeta;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Rect;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,22 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.image.SmartImageView;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -74,9 +65,6 @@ public class Beers extends AppCompatActivity {
 
                     try {
                         Log.e("El Json: ", responseBody.toString());
-//                        JSONObject ob = new JSONObject(String.valueOf(responseBody));
-//                        JSONArray jsonArray = ob.getJSONArray("cervezas");
-//                        Log.e("Este es el Json: ", jsonArray.toString());
 
                         JSONArray jsonArray = new JSONArray(new String(responseBody));
                         for (int i = 0; i<jsonArray.length(); i++){
@@ -115,20 +103,15 @@ public class Beers extends AppCompatActivity {
         TextView txtBeerName, txtBeerGrados, txtBeerTipo, txtBeerCasa;
 
 
-
-
-
         public ImagenAdapter(Context applicationContext) {
 
             this.context = applicationContext;
             layoutInflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
-
         @Override
         public int getCount() {
             return BeerImagen.size();
-
         }
 
         @Override

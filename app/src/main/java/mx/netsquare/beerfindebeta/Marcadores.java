@@ -7,11 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by dicky on 7/14/2017.
- */
 
 public class Marcadores {
 
@@ -20,16 +16,10 @@ public class Marcadores {
         ArrayList<Marcador> marcadores = new ArrayList<Marcador>();
 
         try {
-            //JSONArray jsonArray = new JSONArray(json);
-
-
-
             for (int i = 0; i < arrJson.length(); i++) {
                 JSONObject jsonObj = arrJson.getJSONObject(i);
 
                 Log.e("Info", "--------------- Ini Json ------------------");
-
-
 
                 Marcador marcador = new Marcador();
                 marcador.setLugar(jsonObj.getString("lugar"));

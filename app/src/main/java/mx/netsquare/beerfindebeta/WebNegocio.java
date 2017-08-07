@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 public class WebNegocio extends Activity {
 
-    private WebView mWebview ;
+    private WebView mWebview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,13 @@ public class WebNegocio extends Activity {
         mWebview .loadUrl(intent.getStringExtra("web"));
         setContentView(mWebview);
 
+
+
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

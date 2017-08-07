@@ -73,14 +73,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLngBounds Chihuahua = new LatLngBounds(new LatLng(28.6, -106.1), new LatLng(28.7, -106.15));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Chihuahua.getCenter(), 12));
 
-
-
         //Crear Consulta para llamar puntos
 
         LatLng utch = new LatLng(28.6458775, -106.1475035);
-    //    mMap.addMarker(new MarkerOptions().position(utch).title("UTCH"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(utch));
-
 
         UiSettings uisettings = mMap.getUiSettings();
         uisettings.setAllGesturesEnabled(true);
@@ -92,8 +88,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         getUbicacion();
 
-
     }
+
 
     private void getUbicacion() {
 
@@ -139,6 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
     private void setUpMap() {
         if (localizado) {
             if (mMap != null) {
@@ -153,6 +150,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -163,9 +161,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getUbicacion();
 
             } else {
-
-                // permission denied, boo! Disable the
-                // functionality that depends on this permission.
 
                 Toast.makeText(this, "La app no tiene permiso de usar tu ubicación se utilizará " +
                                 "UTCH como referencia"
@@ -185,8 +180,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         mMap.addMarker(new MarkerOptions().position(point).title(point.toString()));
-
-        //The code below demonstrate how to convert between LatLng and Location
 
         //Convert LatLng to Location
         Location location = new Location("Test");

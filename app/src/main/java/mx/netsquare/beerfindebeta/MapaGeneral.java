@@ -1,11 +1,8 @@
 package mx.netsquare.beerfindebeta;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,19 +27,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.loopj.android.http.AsyncHttpClient.LOG_TAG;
 
-public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener {
-
-    //public static List<Marcador> lugares;
-
-    private JSONParser jsonParser = null; //Objeto conexion webservice
+public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
-
-    private static final String TAG_PLACES   = "marcadores";
 
     private static final String LOG_TAG = "Prueba: ";
 
@@ -78,22 +67,17 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Chihuahua.getCenter(), 14));
         }
 
-        //mMap.setMaxZoomPreference(15.0f);
 
+        // llamar eventos
         UiSettings uisettings = mMap.getUiSettings();
         uisettings.setAllGesturesEnabled(true);
         uisettings.setMyLocationButtonEnabled(true);
-
-        mMap.setOnInfoWindowClickListener(this);
         mMap.setOnMarkerClickListener(this);
-
-
-
-        //Agregar sitios en el mapa para primer referencia y posicion
 
     }
 
-        class MarkerTask extends AsyncTask<Void, Void, String> {
+
+    class MarkerTask extends AsyncTask<Void, Void, String> {
 
             @Override
             protected void onPreExecute() {
@@ -161,30 +145,25 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
 
                     Marcador m = null;
-                    //for(Marcador m : lugares){
+
                     for (int i = 0; i < lugares.size(); i++) {
 
                         m = lugares.get(i);
-
                         Log.e("Mapa General ", m.toString());
 
                         double lat = Double.parseDouble(m.getGm_latitud());
                         double lng = Double.parseDouble(m.getGm_longitud());
                         LatLng latLng = new LatLng(lat, lng);
 
-
                         if (i == 0)
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
 
                             mMap.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.defaultMarker())
                                 .title(m.getLugar())
                                 .snippet(m.getDescripcion())
                                 .position(latLng));
-
                     }
-
 
                 } catch (Exception e) {
                     Log.e(LOG_TAG, "Error generando marcadores de espacios", e);
@@ -193,8 +172,6 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
                 progressDialog.dismiss();
 
             }
-
-
 
         }
 
@@ -206,11 +183,6 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
             super.onPreExecute();
 
             marcadores = new JSONArray();
-
-/*            progressDialog = new ProgressDialog(MapaGeneral.this);
-            progressDialog.setMessage("Cargando...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();*/
 
         }
         // Invoked by execute() method of this object
@@ -253,25 +225,20 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
             Log.e("Error",json.toString());
 
             try {
-
                 JSONObject ob = new JSONObject(json);
                 JSONArray arr = ob.getJSONArray("marcadores");
-
 
                 ArrayList<Marcador> lugares =
                         Marcadores.parseJsonToObject(arr);
 
-
                 if (lugares == null)
                     Log.e("Error", "No es nulo");
 
-
                 Marcador m = null;
-                //for(Marcador m : lugares){
+
                 for (int i = 0; i < lugares.size(); i++) {
 
                     m = lugares.get(i);
-
                     Log.e("Mapa General ", m.toString());
 
                     double lat = Double.parseDouble(m.getGm_latitud());
@@ -296,24 +263,12 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
                 Log.e(LOG_TAG, "Error generando marcadores de espacios", e);
             }
 
-            //progressDialog.dismiss();
-
         }
-
-
-
-    }
-
-
-    @Override
-    public void onInfoWindowClick(Marker marker) {
 
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-
-        
 
         return false;
     }
