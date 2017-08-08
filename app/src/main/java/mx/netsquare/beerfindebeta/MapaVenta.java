@@ -77,7 +77,7 @@ public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, G
 
         //Se genera el limite del mapa y se ejecuta la clase VentasTask.
         //La clase VentasTask hace lo mismo que MarkerTask, salvo por una diferencia.
-        LatLngBounds Chihuahua = new LatLngBounds(new LatLng(28.6, -106.1), new LatLng(28.7, -106.15));
+        LatLngBounds Chihuahua = new LatLngBounds(new LatLng(28.6, -106.1), new LatLng(28.7,-106.15));
         if (mMap != null) {
             mMap.clear();
             new VentasTask().execute();
@@ -188,6 +188,7 @@ public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, G
                                 .position(latLng));
                     }
 
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
 
             } catch (Exception e) {
