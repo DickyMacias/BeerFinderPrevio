@@ -154,16 +154,21 @@ public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, G
 
                     double lat = Double.parseDouble(v.getGm_latitud());
                     double lng = Double.parseDouble(v.getGm_longitud());
+                    String match = String.valueOf(v.getBeerID());
                     LatLng latLng = new LatLng(lat, lng);
 
-                    if (i == 0)
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    if (BEERFAV.equals(match)) {
 
-                    mMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.defaultMarker())
-                            .title(v.getLugar())
-                            .snippet(v.getDescripcion())
-                            .position(latLng));
+                        if (i == 0)
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                        mMap.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.defaultMarker())
+                                .title(v.getLugar())
+                                .snippet(v.getDescripcion())
+                                .position(latLng));
+                    }
+
                 }
 
             } catch (Exception e) {
