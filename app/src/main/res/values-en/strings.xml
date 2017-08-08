@@ -64,6 +64,7 @@
     <string name="direccion">Address:</string>
     <string name="cervezas">Beers</string>
     <string name="lugares">Bookmarks</string>
-    <string name="abrir_preferencias">Bebidas preferidas</string>
+    <string name="abrir_preferencias">Find</string>
+    <string name="title_activity_mapa_venta">Map</string>
 
 </resources>

@@ -37,7 +37,7 @@ public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, G
 
     private static String BEERFAV = null;
 
-    private final String SERVICE_URL = "http://192.168.56.1:9090/webservice/get_consulta_ventas.php";
+    private final String SERVICE_URL = "http://beerfinderbeta.96.lt/webservice/get_consulta_ventas.php";
 
     private JSONArray ventas = null;
     private ProgressDialog progressDialog;

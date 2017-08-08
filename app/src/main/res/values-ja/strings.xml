@@ -64,6 +64,7 @@
     <string name="direccion">住所：</string>
     <string name = "cervezas">ビールス</string>
     <string name = "lugares">ブックマーク</string>
-    <string name="abrir_preferencias">Bebidas preferidas</string>
+    <string name="abrir_preferencias">検索</string>
+    <string name="title_activity_mapa_venta">地図</string>
 
 </resources>
