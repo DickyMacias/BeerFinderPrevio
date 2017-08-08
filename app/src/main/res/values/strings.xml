@@ -14,7 +14,6 @@
     <string name="marker_lng">%1$.14f</string>
 
 
-
     <string name="usuario">Usuario</string>
     <string name="contrasena">Contraseña</string>
     <string name="olvidoContrasena">Olvidaste tu Contraseña?</string>
@@ -24,7 +23,6 @@
     <string name="confirmarContrasena">Confirmar Contraseña</string>
     <string name="telefono">Telefono</string>
     <string name="registrarse">Registrarse</string>
-
 
 
     <string name="title_activity_mapa_general">Mapa</string>
@@ -66,5 +64,7 @@
     <string name="direccion">Direccion:</string>
     <string name="cervezas">Cervezas</string>
     <string name="lugares">Lugares</string>
+    <string name="abrir_preferencias">Bebidas preferidas</string>
+    <string name="title_activity_mapa_venta">Map</string>
 
 </resources>

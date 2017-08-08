@@ -1,12 +1,16 @@
 package mx.netsquare.beerfindebeta;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,8 +30,11 @@ public class Beers extends AppCompatActivity {
 
     private final String SERVICE_URL = "http://www.beerfinderbeta.96.lt/webservice/get_beer2.php";
 
+    public static String ID_PREF = null;
+
     private ListView listView;
 
+    ArrayList BeerID = new ArrayList();
     ArrayList BeerName = new ArrayList();
     ArrayList BeerGrados  = new ArrayList();
     ArrayList BeerTipo  = new ArrayList();
@@ -44,10 +51,42 @@ public class Beers extends AppCompatActivity {
 
         cargarImagen();
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id){
+                AlertDialog.Builder preferencias = new AlertDialog.Builder(Beers.this);
+                preferencias.setMessage(BeerName.get(position).toString()).setCancelable(false)
+                        .setPositiveButton(R.string.abrir_preferencias, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intento = new Intent(getApplicationContext(), MapaVenta.class);
+                                ID_PREF = BeerID.get(position).toString();
+                                intento.putExtra("beerfav", ID_PREF);
+                                startActivity(intento);
+
+                            }
+                        })
+                        .setNegativeButton(R.string.cerrar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+
+                            }
+                        });
+
+                preferencias.show();
+
+            }
+        });
+
+
     }
 
     private void cargarImagen() {
 
+        BeerID.clear();
         BeerName.clear();
         BeerGrados.clear();
         BeerTipo.clear();
@@ -68,6 +107,7 @@ public class Beers extends AppCompatActivity {
 
                         JSONArray jsonArray = new JSONArray(new String(responseBody));
                         for (int i = 0; i<jsonArray.length(); i++){
+                            BeerID.add(jsonArray.getJSONObject(i).getString("BeerID"));
                             BeerName.add(jsonArray.getJSONObject(i).getString("BeerName"));
                             BeerGrados.add(jsonArray.getJSONObject(i).getString("BeerGrados"));
                             BeerTipo.add(jsonArray.getJSONObject(i).getString("BeerTipo"));

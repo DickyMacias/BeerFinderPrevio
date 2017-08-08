@@ -87,7 +87,15 @@
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".Negocios" />
         <activity android:name=".WebNegocio" />
-        <activity android:name=".BeerDescripcion"></activity>
+        <activity android:name=".BeerDescripcion" />
+        <activity android:name=".Venta" />
+        <activity
+            android:name=".MapaVenta"
+            android:label="@string/title_activity_mapa_venta">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mx.netsquare.beerfindebeta.Beers" />
+        </activity>
     </application>
 
 </manifest>

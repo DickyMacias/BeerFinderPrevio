@@ -114,9 +114,9 @@ public class Registro extends AppCompatActivity {
             super.onPostExecute(s);
             progressDialog.dismiss();
             if(s.equals("ok")){
-                Toast.makeText(Registro.this, R.string.usuario_registrado, Toast.LENGTH_SHORT).show();
-            }else{
                 Toast.makeText(Registro.this, R.string.usuario_no_registrado, Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(Registro.this, R.string.usuario_registrado, Toast.LENGTH_SHORT).show();
             }
         }
 

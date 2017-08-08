@@ -241,6 +241,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
                     m = lugares.get(i);
                     Log.e("Mapa General ", m.toString());
 
+
                     double lat = Double.parseDouble(m.getGm_latitud());
                     double lng = Double.parseDouble(m.getGm_longitud());
                     LatLng latLng = new LatLng(lat, lng);
