@@ -25,7 +25,7 @@ public class WebNegocio extends Activity {
 
         mWebview  = new WebView(this);
 
-        // activar javascript
+        // activar javascript en el webView
         mWebview.getSettings().setJavaScriptEnabled(true);
 
         // declarar actividad
@@ -40,6 +40,7 @@ public class WebNegocio extends Activity {
         });
 
         //Se arrastra la informacion del intent anterior para obtener la url
+        //y se carga en el webView para que se muestre.
         Intent intent = getIntent();
         mWebview .loadUrl(intent.getStringExtra("web"));
         setContentView(mWebview);
