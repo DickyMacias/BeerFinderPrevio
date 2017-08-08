@@ -1,3 +1,12 @@
+/*En esta clase se crea un ArrayList generico que contiene un objeto de tipo
+ venta. En este objeto se deserializa el JSON.
+
+Desarrrollada por Ricardo Ivan Macias Fusco y Daniel Emir Olivas Castro.
+Fecha de Creacion: 07/Agosto/2017
+Version 1.0(Version reciente en la clase Android Manifest)
+Ultima Actualizacion: 08/Agosto/2017
+*/
+
 package mx.netsquare.beerfindebeta;
 import android.app.Activity;
 import android.content.Intent;

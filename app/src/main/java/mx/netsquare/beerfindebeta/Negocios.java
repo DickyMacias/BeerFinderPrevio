@@ -1,3 +1,13 @@
+/*Esta clase permite llamar desde la base de datos la inforamcion
+ de los diferentes negocios que hay establecidos.
+ Los datos se almacenan en arreglos para despues pintar los diferentes layouts.
+
+Desarrollada por Ricardo Ivan Macias Fusco y Daniel Emir Olivas Castro.
+Fecha de Creacion: 16/Mayo/2017
+Version 1.0(Version reciente en la clase Android Manifest)
+Ultima Actualizacion: 08/Agosto/2017
+*/
+
 package mx.netsquare.beerfindebeta;
 
 import android.content.DialogInterface;
@@ -31,7 +41,8 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 
-
+//La logica de la clase negocios es igual a la de la clase beer. Varia en que implementa
+// un gridView en lugar de un listView.
 public class Negocios extends AppCompatActivity {
 
     private final String SERVICE_URL = "http://www.beerfinderbeta.96.lt/webservice/get_negocios.php";

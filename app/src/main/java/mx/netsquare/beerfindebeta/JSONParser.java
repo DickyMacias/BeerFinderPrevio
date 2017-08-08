@@ -1,3 +1,9 @@
+/*Libreria para poder parsear los JSON y devolverlos como objetos.
+
+Version 1.0(Version reciente en la clase Android Manifest)
+Ultima Actualizacion: 14/Junio/2017
+*/
+
 package mx.netsquare.beerfindebeta;
 
 import java.io.BufferedReader;

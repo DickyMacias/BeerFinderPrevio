@@ -66,5 +66,6 @@
     <string name="lugares">Lugares</string>
     <string name="abrir_preferencias">Localizar</string>
     <string name="title_activity_mapa_venta">Mapa</string>
+    <string name="coordenadas_guardadas">Las coordenadas han sido guardadas</string>
 
 </resources>

@@ -1,3 +1,13 @@
+/*Esta clase permite al usuario visualizar en un mapa los lugares donde venden las cervezas de
+su preferencia, dandole la oportunidad de seleccionar un punto y poder navegar a el.
+Esta base implementa la API de Google Maps.
+
+Desarrrollada por Ricardo Ivan Macias Fusco y Daniel Emir Olivas Castro.
+Fecha de Creacion: 7/Agosto/2017
+Version 1.0(Version reciente en la clase Android Manifest)
+Ultima Actualizacion: 8/Agosto/2017
+*/
+
 package mx.netsquare.beerfindebeta;
 
 import android.app.ProgressDialog;
@@ -28,15 +38,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-
+//Esta clase implementa los metodos llamados en la clase MapaGeneral.
 public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
     private static final String LOG_TAG = "Prueba: ";
 
+    //Se inicializa como nula una variable que sera usada para obtener los datos
+    // enviados desde la actividad Beers
     private static String BEERFAV = null;
 
+    //Se inicializa la consulta de PHP que revisara los sitios donde se venden diferentes tipos de cerveza.
     private final String SERVICE_URL = "http://beerfinderbeta.96.lt/webservice/get_consulta_ventas.php";
 
     private JSONArray ventas = null;
@@ -58,9 +71,12 @@ public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, G
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //Se arrastra el ID de la cerveza desde la actividad previa.
         Intent intent = getIntent();
         BEERFAV = intent.getStringExtra("beerfav");
 
+        //Se genera el limite del mapa y se ejecuta la clase VentasTask.
+        //La clase VentasTask hace lo mismo que MarkerTask, salvo por una diferencia.
         LatLngBounds Chihuahua = new LatLngBounds(new LatLng(28.6, -106.1), new LatLng(28.7, -106.15));
         if (mMap != null) {
             mMap.clear();
@@ -69,7 +85,7 @@ public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, G
         }
 
 
-        // llamar eventos
+        // Se llaman los gestos de la interfaz grafica de la API de Google Maps
         UiSettings uisettings = mMap.getUiSettings();
         uisettings.setAllGesturesEnabled(true);
         uisettings.setMyLocationButtonEnabled(true);
@@ -157,6 +173,9 @@ public class MapaVenta extends FragmentActivity implements OnMapReadyCallback, G
                     String match = String.valueOf(v.getBeerID());
                     LatLng latLng = new LatLng(lat, lng);
 
+                    // Se revisa si el ID de la actividad anterior coincide
+                    //con el ID de la cerveza que esta en el arreglo de ventas.
+                    //Solamente si coincide genera un marcador.
                     if (BEERFAV.equals(match)) {
 
                         if (i == 0)

@@ -1,3 +1,13 @@
+/*En esta clase se crea un menu desplegable que contendra el acceso a las
+diferentes funciones dentro de la aplicacion.
+Esta clase es creada automaticamente por el wizard de Android Studio.
+
+Desarrrollada por Ricardo Ivan Macias Fusco y Daniel Emir Olivas Castro.
+Fecha de Creacion: 16/Junio/2017
+Version 1.0(Version reciente en la clase Android Manifest)
+Ultima Actualizacion: 6/Agosto/2017
+*/
+
 package mx.netsquare.beerfindebeta;
 
 import android.content.Intent;
@@ -69,6 +79,9 @@ public class MenuDesplegable extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        //Se asignan segun los diferentes items que se encuentren en la lista de menu
+        //las actividades que haran.
+        //Todos los items envian a un nuevo activity.
         if (id == R.id.nav_camera) {
             Intent intentRegistro = new Intent(this, Beers.class);
             startActivity(intentRegistro);

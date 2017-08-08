@@ -1,3 +1,13 @@
+/*Esta clase permite al usuario llamar la API de google maps, generando un map en el cual se
+desplegaran los diferentes marcadores geenerados a partir de las consultas hechas a una base
+de datos.
+
+Desarrrollada por Ricardo Ivan Macias Fusco y Daniel Emir Olivas Castro.
+Fecha de Creacion: 16/Mayo/2017
+Version 1.0(Version reciente en la clase Android Manifest)
+Ultima Actualizacion: 5/Agosto/2017
+*/
+
 package mx.netsquare.beerfindebeta;
 
 import android.app.ProgressDialog;
@@ -28,17 +38,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-
+//Mapa general es una actividad que se extiende de un fragmento y llama a los metodos de Google Maps API.
 public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+    //Se crea una variable mapa con sus metodos.
     private GoogleMap mMap;
 
     private static final String LOG_TAG = "Prueba: ";
 
+    //Se declaran las consultas que se vayan a realizar con PHP a la base de datos. En este caso
+    //Se llaman una generadora de negocios y otra de marcadores.
     private final String SERVICE_URL = "http://www.beerfinderbeta.96.lt/webservice/get_all_markers.php";
     private final String SERVICE_URL2 = "http://www.beerfinderbeta.96.lt/webservice/get_all_negocios.php";
 
-
+    //Se inicializa un JSONArray que contendra la informacion extraida de la base de datos.
     private JSONArray marcadores = null;
     private ProgressDialog progressDialog;
 
@@ -55,11 +68,14 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
+    // inicializamos la variable mapa.
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //Determinamos un limite al area que sera encuadrada en el mapa inicialmente.
         LatLngBounds Chihuahua = new LatLngBounds(new LatLng(28.6, -106.1), new LatLng(28.7, -106.15));
+        // Revisamos el estatus del mapa y llamamos los metodos.
         if (mMap != null) {
             mMap.clear();
             new MarkerTask().execute();
@@ -68,7 +84,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
         }
 
 
-        // llamar eventos
+        // Se llaman los eventos que se le permitiran al mapa durante su periodo de vida.
         UiSettings uisettings = mMap.getUiSettings();
         uisettings.setAllGesturesEnabled(true);
         uisettings.setMyLocationButtonEnabled(true);
@@ -77,14 +93,18 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
+    //Se genera un hilo para realizar una consulta.
     class MarkerTask extends AsyncTask<Void, Void, String> {
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
 
+                //Se instancia el JSONArray para almacenar la consulta.
                 marcadores = new JSONArray();
 
+                //Se crea un progressDialog para dejar trabajndo la app en segunda instancia.
+                //No se creara para el otro metodo ya que corren simultaneos.
                 progressDialog = new ProgressDialog(MapaGeneral.this);
                 progressDialog.setMessage(getString(R.string.cargando));
                 progressDialog.setCancelable(false);
@@ -103,7 +123,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
                     conn = (HttpURLConnection) url.openConnection();
                     InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
-                    // Leer informacion del Json en el Builder
+                    // Leer informacion del Json en el Builder con un socket.
                     int read;
                     char[] buff = new char[1024];
                     while ((read = in.read(buff)) != -1) {
@@ -127,37 +147,50 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
             @Override
             protected void onPostExecute(String json) {
 
+                //Revisamos status del JSON
                 Log.e("No funciona",SERVICE_URL);
                 Log.e("Error",json.toString());
 
                 try {
 
+                    //El Json recibido se convierte en un JSONObject y despues se transforma
+                    //en un arreglo para poder llamar a la clase Marcador que tiene una lista
+                    //de arreglos.
                     JSONObject ob = new JSONObject(json);
                     JSONArray arr = ob.getJSONArray("marcadores");
 
-
+                    //Se deserializa el Json al pasarlo al ArrayList.
+                    //Se utiliza la clase Marcadores para pasar el arreglo.
                     ArrayList<Marcador> lugares =
-                            Marcadores.parseJsonToObject(arr);
+                        Marcadores.parseJsonToObject(arr);
 
 
                     if (lugares == null)
                         Log.e("Error", "No es nulo");
 
-
+                    //Iniciamos objeto tipo marcador.
                     Marcador m = null;
 
+                    //Recorremos el ArrayList para poder pasar la informacion al objeto Marcador.
                     for (int i = 0; i < lugares.size(); i++) {
 
                         m = lugares.get(i);
                         Log.e("Mapa General ", m.toString());
 
+                        //Pasamos las latitudes y longitudes del Arreglo y creamos un nuevo Objeto
+                        //Que contendra las coordenadas.
                         double lat = Double.parseDouble(m.getGm_latitud());
                         double lng = Double.parseDouble(m.getGm_longitud());
                         LatLng latLng = new LatLng(lat, lng);
 
+                        //Verificamos la posicion en el arreglo y movemos la camara
+                        //a las coordenadas indicadas.
                         if (i == 0)
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
+                        //Se crea un marcador al cual se le asignan los datos del arreglo
+                        //Se itera hasta que se haya recorridotodo el arreglo
+                        //y generado todos los marcadores.
                             mMap.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.defaultMarker())
                                 .title(m.getLugar())
@@ -176,6 +209,7 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
         }
 
 
+        //Repite la misma funcion de la clase MarkerTask pero con otra consulta diferente.
     class NegocioTask extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -268,12 +302,14 @@ public class MapaGeneral extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
+    //Sirve para seleccionar un marcador.
     @Override
     public boolean onMarkerClick(Marker marker) {
 
         return false;
     }
 
+    // Boton que genera un nuevo activity llamado MapsActivity
     public void AgregaLugar(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);

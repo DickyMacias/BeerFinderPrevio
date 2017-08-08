@@ -66,5 +66,6 @@
     <string name = "lugares">ブックマーク</string>
     <string name="abrir_preferencias">検索</string>
     <string name="title_activity_mapa_venta">地図</string>
+    <string name="coordenadas_guardadas">Las coordenadas han sido guardadas</string>
 
 </resources>
